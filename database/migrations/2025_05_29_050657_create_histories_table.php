@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->date('tanggal');
+            $table->text('gejala_terpilih');
+            $table->text('hasil_diagnosa');
             $table->timestamps();
         });
     }
