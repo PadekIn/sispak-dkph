@@ -4,6 +4,7 @@ use App\Http\Controllers\KerusakanController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\GejalaController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,6 +46,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/edit/{id}', [KerusakanController::class, 'edit'])->name('admin.kerusakan.edit');
         Route::put('/update/{id}', [KerusakanController::class, 'update'])->name('admin.kerusakan.update');
         Route::delete('/destroy/{id}', [KerusakanController::class, 'destroy'])->name('admin.kerusakan.destroy');
+    });
+
+    Route::prefix('history')->group(function(){
+        Route::get('/', [HistoryController::class, 'indexAdmin'])->name('admin.history.index');
     });
 
 });
