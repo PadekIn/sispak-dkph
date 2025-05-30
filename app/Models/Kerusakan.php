@@ -11,8 +11,8 @@ class Kerusakan extends Model
     use HasFactory;
 
         protected $fillable = [
-            'nama',
-            'kategori',
+            'nama_kerusakan',
+            'jenis_kerusakan',
             'solusi'
         ];
 
