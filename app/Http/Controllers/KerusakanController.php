@@ -33,10 +33,16 @@ class KerusakanController extends Controller
             return redirect()->back()->with('error', 'Gagal menambahkan kerusakan: ' . $e->getMessage());
         }
     }
-    public function edit(Kerusakan $kerusakan) {
-        return view('pages.admin.kerusakan.edit', compact('kerusakan'));
+    public function edit($id) {
+
+        try {
+            $kerusakans = Kerusakan::find( $id);
+            return view('pages.admin.kerusakan.edit', compact('kerusakans'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengambil data kerusakan: ' . $e->getMessage());
+        }
     }
-    public function update(Request $request, Kerusakan $kerusakan) {
+    public function update(Request $request, $id) {
         $request->validate([
             'nama_kerusakan' => 'required|string|max:255',
             'jenis_kerusakan' => 'required|string|max:255',
@@ -44,14 +50,16 @@ class KerusakanController extends Controller
         ]);
 
         try {
+            $kerusakan = Kerusakan::findOrFail($id);
             $kerusakan->update($request->all());
             return redirect()->route('kerusakan.index')->with('success', 'Kerusakan berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memperbarui kerusakan: ' . $e->getMessage());
         }
     }
-    public function destroy(Kerusakan $kerusakan) {
+    public function destroy($id) {
         try {
+            $kerusakan = Kerusakan::findOrFail($id);
             $kerusakan->delete();
             return redirect()->route('kerusakan.index')->with('success', 'Kerusakan berhasil dihapus.');
         } catch (\Exception $e) {
