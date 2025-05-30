@@ -13,32 +13,28 @@ class GejalaSeeder extends Seeder
      */
     public function run(): void
     {
-        Gejala::create(['kode' => 'G01', 'nama' => 'Blank Hitam']);
-        Gejala::create(['kode' => 'G01', 'nama' => 'Bergaris']);
-        Gejala::create(['kode' => 'G01', 'nama' => 'Ada tanda2 HP gidup, namun layar mati']);
-        Gejala::create(['kode' => 'G01', 'nama' => 'Sebagian LCD bisa disentuh, sebagian lagi tidak bisa disentuh']);
-        Gejala::create(['kode' => 'G01', 'nama' => 'Bercak Hitam']);
-        Gejala::create(['kode' => 'G01', 'nama' => 'Kurang sensitif/ susah disentuh']);
-
-        Gejala::create(['kode' => 'G02', 'nama' => 'Gembung']);
-        Gejala::create(['kode' => 'G02', 'nama' => 'Dicass tidak mau penuh 100%']);
-        Gejala::create(['kode' => 'G02', 'nama' => 'Ketika di charger meloncat dari 20% ke 80%']);
-        Gejala::create(['kode' => 'G02', 'nama' => 'Baterai 30% tapi tiba-tiba mati']);
-        Gejala::create(['kode' => 'G02', 'nama' => 'Main harus sambil di charger, jika tidak di charger mati']);
-        Gejala::create(['kode' => 'G02', 'nama' => 'Baterai cepat habis']);
-
-        Gejala::create(['kode' => 'G03', 'nama' => 'HP tidak bisa di charger']);
-        Gejala::create(['kode' => 'G03', 'nama' => 'kabel USB mesti digoyang baru mau masuk']);
-        Gejala::create(['kode' => 'G03', 'nama' => 'Dicass tidak menambahkan daya']);
-
-        Gejala::create(['kode' => 'G04', 'nama' => 'Kamera blank hitam']);
-        Gejala::create(['kode' => 'G04', 'nama' => 'Kamera tidak bisa dibuka']);
-        Gejala::create(['kode' => 'G04', 'nama' => 'Buram']);
-        Gejala::create(['kode' => 'G04', 'nama' => 'Bergoyang']);
-        Gejala::create(['kode' => 'G04', 'nama' => 'Berjamur']);
-
-        Gejala::create(['kode' => 'G05', 'nama' => 'HP tidak bisa menyala/mati total']);
-        Gejala::create(['kode' => 'G05', 'nama' => 'masuk air']);
-        Gejala::create(['kode' => 'G05', 'nama' => 'Tegangan tidak stabil']);
+        Gejala::create(['kode_gejala' => 'G01', 'nama_gejala' => 'Bergaris']);
+        Gejala::create(['kode_gejala' => 'G01', 'nama_gejala' => 'Blank Hitam']);
+        Gejala::create(['kode_gejala' => 'G01', 'nama_gejala' => 'Ada tanda2 HP gidup, namun layar mati']);
+        Gejala::create(['kode_gejala' => 'G01', 'nama_gejala' => 'Sebagian LCD bisa disentuh, sebagian lagi tidak bisa disentuh']);
+        Gejala::create(['kode_gejala' => 'G01', 'nama_gejala' => 'Bercak Hitam']);
+        Gejala::create(['kode_gejala' => 'G01', 'nama_gejala' => 'Kurang sensitif/ susah disentuh']);
+        Gejala::create(['kode_gejala' => 'G02', 'nama_gejala' => 'Gembung']);
+        Gejala::create(['kode_gejala' => 'G02', 'nama_gejala' => 'Dicass tidak mau penuh 100%']);
+        Gejala::create(['kode_gejala' => 'G02', 'nama_gejala' => 'Ketika di charger meloncat dari 20% ke 80%']);
+        Gejala::create(['kode_gejala' => 'G02', 'nama_gejala' => 'Baterai 30% tapi tiba-tiba mati']);
+        Gejala::create(['kode_gejala' => 'G02', 'nama_gejala' => 'Main harus sambil di charger, jika tidak di charger mati']);
+        Gejala::create(['kode_gejala' => 'G02', 'nama_gejala' => 'Baterai cepat habis']);
+        Gejala::create(['kode_gejala' => 'G03', 'nama_gejala' => 'HP tidak bisa di charger']);
+        Gejala::create(['kode_gejala' => 'G03', 'nama_gejala' => 'kabel USB mesti digoyang baru mau masuk']);
+        Gejala::create(['kode_gejala' => 'G03', 'nama_gejala' => 'Dicass tidak menambahkan daya']);
+        Gejala::create(['kode_gejala' => 'G04', 'nama_gejala' => 'Kamera blank hitam']);
+        Gejala::create(['kode_gejala' => 'G04', 'nama_gejala' => 'Kamera tidak bisa dibuka']);
+        Gejala::create(['kode_gejala' => 'G04', 'nama_gejala' => 'Buram']);
+        Gejala::create(['kode_gejala' => 'G04', 'nama_gejala' => 'Bergoyang']);
+        Gejala::create(['kode_gejala' => 'G04', 'nama_gejala' => 'Berjamur']);
+        Gejala::create(['kode_gejala' => 'G05', 'nama_gejala' => 'HP tidak bisa menyala/mati total']);
+        Gejala::create(['kode_gejala' => 'G05', 'nama_gejala' => 'masuk air']);
+        Gejala::create(['kode_gejala' => 'G05', 'nama_gejala' => 'Tegangan tidak stabil']);
     }
 }
