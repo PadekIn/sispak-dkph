@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <p class="text-gray-600">Silakan isi kuesioner berikut untuk membantu kami meningkatkan layanan.</p>
 
-                    <form method="POST" action="{{ route('') }}">
+                    <!-- <form method="POST" action="{{ route('') }}">
                         @csrf
                         @foreach ($gejalas as $gejala)
                             <div class="flex items-center mb-2">
@@ -22,7 +22,7 @@
                         <x-primary-button class="mt-4">
                             {{ __('Kirim Kuesioner') }}
                         </x-primary-button>
-                    </form>
+                    </form> -->
 
                 </div>
             </div>
