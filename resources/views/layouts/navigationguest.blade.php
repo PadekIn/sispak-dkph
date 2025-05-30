@@ -23,8 +23,8 @@
 
             <!-- login and regist button -->
             <div class="flex items-center space-x-2">
-                <a href="{{ route('register') }}" class="px-2 py-1 rounded bg-white text-black border border-black hover:bg-gray-500 transition text-sm">Register</a>
-                <a href="{{ route('login') }}" class="px-5 py-1 rounded bg-black text-white border border-black hover:bg-gray-500 transition text-sm">Login</a>
+                <a href="{{ route('register') }}" class="px-2 py-1 rounded bg-white text-black border border-black hover:bg-gray-300 transition text-sm">Register</a>
+                <a href="{{ route('login') }}" class="px-5 py-1 rounded bg-black text-white border border-black hover:bg-gray-600 transition text-sm">Login</a>
             </div>
 
             <!-- Hamburger -->
