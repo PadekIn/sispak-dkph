@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         GejalaSeeder::class,
         // PertanyaanSeeder::class,
         KerusakanSeeder::class,
-        // RuleSeeder::class,
+        RuleSeeder::class,
     ]);
     }
 }
