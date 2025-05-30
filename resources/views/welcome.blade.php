@@ -31,7 +31,7 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-100 to-white min-h-screen flex items-center justify-center px-4">
+<body class="bg-gray-100 to-white min-h-screen flex items-center justify-center px-4">
      <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center fade-in">
         <img src="{{ asset('assets/img/logo-sispak-dkph.png') }}" alt="Logo SISPAK-DKPH" class="mx-auto mb-6 h-24 drop-shadow-md">
 
