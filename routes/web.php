@@ -19,8 +19,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('guest')
+    ->name('login');
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->middleware('guest')
+    ->name('register');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
