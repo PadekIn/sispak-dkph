@@ -37,19 +37,25 @@ class GejalaController extends Controller
         }
     }
 
-    public function edit(Gejala $gejala)
+    public function edit($id)
     {
-        return view('gejala.edit', compact('gejala'));
+        try{
+            $gejala = Gejala::findOrFail($id);
+            return view('gejala.edit', compact('gejala'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengambil data gejala: ' . $e->getMessage());
+        }
     }
 
-    public function update(Request $request, Gejala $gejala)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'kode_gejala' => 'required|string|max:10|unique:gejalas,kode_gejala,' . $gejala->id,
+            'kode_gejala' => 'required|string|max:10|unique:gejalas,kode_gejala,' ,
             'nama_gejala' => 'required|string|max:255',
         ]);
 
         try {
+            $gejala = Gejala::findOrFail($id);
             $gejala->update($request->all());
             return redirect()->route('gejala.index')->with('success', 'Gejala berhasil diperbarui.');
         } catch (\Exception $e) {
@@ -57,9 +63,10 @@ class GejalaController extends Controller
         }
     }
 
-    public function destroy(Gejala $gejala)
+    public function destroy($id)
     {
         try {
+            $gejala = Gejala::findOrFail($id);
             $gejala->delete();
             return redirect()->route('gejala.index')->with('success', 'Gejala berhasil dihapus.');
         } catch (\Exception $e) {
