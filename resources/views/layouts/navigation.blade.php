@@ -15,7 +15,7 @@
                     <x-nav-link :href="route('guest.kuesioner')" :active="request()->routeIs('guest.kuesioner')">
                         {{ __('Kuesioner') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('guest.histori')" :active="request()->routeIs('guest.histori')">
                         {{ __('Histori') }}
                     </x-nav-link>
                 </div>
