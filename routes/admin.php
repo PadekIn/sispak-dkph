@@ -5,6 +5,7 @@ use App\Http\Controllers\RuleController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,6 +51,15 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::prefix('history')->group(function(){
         Route::get('/', [HistoryController::class, 'indexAdmin'])->name('admin.history.index');
+    });
+
+    Route::prefix('user')->group(function(){
+        Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
+        Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
+        Route::post('/store', [UserController::class, 'store'])->name('admin.user.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+        Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
+        Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
     });
 
 });
