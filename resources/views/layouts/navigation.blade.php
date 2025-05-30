@@ -12,8 +12,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('pengguna.kuesioner')" :active="request()->routeIs('pengguna.kuesioner')">
-                        {{ __('Kuesioner') }}
+                    <x-nav-link :href="route('pengguna.diagnosa')" :active="request()->routeIs('pengguna.diagnosa')">
+                        {{ __('Diagnosa') }}
                     </x-nav-link>
                     <x-nav-link :href="route('pengguna.histori')" :active="request()->routeIs('pengguna.histori')">
                         {{ __('Histori') }}
