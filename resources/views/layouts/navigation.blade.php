@@ -12,10 +12,10 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('guest.kuesioner')" :active="request()->routeIs('guest.kuesioner')">
+                    <x-nav-link :href="route('pengguna.kuesioner')" :active="request()->routeIs('pengguna.kuesioner')">
                         {{ __('Kuesioner') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('guest.histori')" :active="request()->routeIs('guest.histori')">
+                    <x-nav-link :href="route('pengguna.histori')" :active="request()->routeIs('pengguna.histori')">
                         {{ __('Histori') }}
                     </x-nav-link>
                 </div>
