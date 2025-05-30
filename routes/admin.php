@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('pages.admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/dashboard', function () {return view('pages.admin.dashboard');})->name('admin.dashboard');
 
     Route::prefix('kerusakan')->group(function(){
         Route::get('/', [KerusakanController::class, 'index'])->name('admin.kerusakan.index');
