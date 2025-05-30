@@ -9,4 +9,13 @@ class Gejala extends Model
 {
     /** @use HasFactory<\Database\Factories\GejalaFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'kode',
+        'nama'
+    ];
+
+    public function pertanyaan() {
+        return $this->hasOne(Pertanyaan::class);
+    }
 }
