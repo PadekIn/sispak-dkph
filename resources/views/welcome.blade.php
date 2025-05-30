@@ -10,7 +10,7 @@
 
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=s    wap" rel="stylesheet" />
 
     <style>
         body {
@@ -38,8 +38,8 @@
         <h1 class="text-3xl font-bold text-gray-800 mb-2">Selamat Datang!</h1>
         <p class="text-sm text-gray-500 mb-6">Sistem Pakar Diagnosa Kerusakan Pada Handphone</p>
 
-        <a href="{{ route('guest.kuesioner') }}"
-            class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-xl shadow-md hover:bg-gray-900 hover:scale-105 transform transition duration-300 ease-in-out">Mulai Kuesioner
+        <a href="{{ route('guest.diagnosa') }}"
+            class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-xl shadow-md hover:bg-gray-900 hover:scale-105 transform transition duration-300 ease-in-out">Mulai Diagnosa
         </a>
     </div>
 </body>
