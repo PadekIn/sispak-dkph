@@ -9,4 +9,9 @@ class Pertanyaan extends Model
 {
     /** @use HasFactory<\Database\Factories\PertanyaanFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'gejala_id',
+        'teks_pertanyaan'
+    ];
 }
