@@ -8,6 +8,6 @@ Route::prefix('pengguna')->group(function () {
         return view('pages.pengguna.dashboard.kuesioner');
     })->name('pengguna.kuesioner');
     Route::get('/histori', function () {
-        return view('pages.pengguna.dashboard.histori');
+        return view('pages.pengguna.history.index');
     })->name('pengguna.histori');
 });
