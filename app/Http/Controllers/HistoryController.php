@@ -14,7 +14,7 @@ class HistoryController extends Controller
     public function indexPengguna() {
         try {
             $histories = session('histories', []);
-            return view('history.index', compact('histories'));
+            return view('pages.admin.history.index', compact('histories'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data riwayat: ' . $e->getMessage());
         }
