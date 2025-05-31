@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guest\DiagnosaGuestController;
-// use App\Http\Controllers\DiagnosaController;
 
 Route::prefix('guest')->group(function () {
     Route::get('/diagnosa', [DiagnosaGuestController::class, 'diagnosa'])->name('guest.diagnosa');

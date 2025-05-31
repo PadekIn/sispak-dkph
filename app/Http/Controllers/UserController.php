@@ -93,7 +93,7 @@ class UserController extends Controller
 
             return redirect()->route('admin.user.index')->with('success', 'User berhasil diubah');
         }  catch (ValidationException $e) {
-             return redirect()->back()->withErrors($e->errors())->withInput();
+            return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             Log::error('Error updating user: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Gagal mengubah data user: ' . $e->getMessage())->withInput();
