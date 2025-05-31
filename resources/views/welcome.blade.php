@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>SISPAK-DKPH - Selamat Datang</title>
+    <title>SISPAK-DKPH</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="./assets/img/logo-sispak-dkph.png" type="image/x-icon">
+
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
