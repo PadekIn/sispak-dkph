@@ -32,8 +32,8 @@
                     <p class="text-gray-500 mb-6">Tidak ada hasil diagnosa yang ditemukan.</p>
                 @endif
 
-                <a href="{{ route('pengguna.diagnosa') }}" class="inline-block px-5 py-2 bg-gray-800 text-white rounded hover:bg-gray-600 transition">
-                    Kembali ke Diagnosa
+                <a href="{{ route('pengguna.histori') }}" class="inline-block px-5 py-2 bg-gray-800 text-white rounded hover:bg-gray-600 transition">
+                    Cek Histori
                 </a>
             </div>
         </div>
