@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Gejala;
 use App\Models\Pertanyaan;
 use App\Models\Rule;
 use App\Models\Kerusakan;
+use Illuminate\Routing\Controller;
 
 class RuleController extends Controller
 {

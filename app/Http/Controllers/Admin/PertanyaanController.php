@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Gejala;
 use App\Models\Pertanyaan;
+use Illuminate\Routing\Controller;
 
 class PertanyaanController extends Controller
 {

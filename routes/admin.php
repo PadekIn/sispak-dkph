@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\KerusakanController;
+use App\Http\Controllers\Admin\KerusakanController;
 use App\Http\Controllers\RuleController;
-use App\Http\Controllers\PertanyaanController;
-use App\Http\Controllers\GejalaController;
-use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\PertanyaanController;
+use App\Http\Controllers\Admin\GejalaController;
+use App\Http\Controllers\Admin\HistoryController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web', 'auth', 'isAdmin'])->prefix('admin')->group(function () {
