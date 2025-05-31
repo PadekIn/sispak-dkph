@@ -29,7 +29,7 @@ class KerusakanController extends Controller
 
         try {
             Kerusakan::create($request->all());
-            return redirect()->route('kerusakan.index')->with('success', 'Kerusakan berhasil ditambahkan.');
+            return redirect()->route('admin.kerusakan.index')->with('success', 'Kerusakan berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menambahkan kerusakan: ' . $e->getMessage());
         }
@@ -53,7 +53,7 @@ class KerusakanController extends Controller
         try {
             $kerusakan = Kerusakan::findOrFail($id);
             $kerusakan->update($request->all());
-            return redirect()->route('kerusakan.index')->with('success', 'Kerusakan berhasil diperbarui.');
+            return redirect()->route('admin.kerusakan.index')->with('success', 'Kerusakan berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memperbarui kerusakan: ' . $e->getMessage());
         }
@@ -62,7 +62,7 @@ class KerusakanController extends Controller
         try {
             $kerusakan = Kerusakan::findOrFail($id);
             $kerusakan->delete();
-            return redirect()->route('kerusakan.index')->with('success', 'Kerusakan berhasil dihapus.');
+            return redirect()->route('admin.kerusakan.index')->with('success', 'Kerusakan berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menghapus kerusakan: ' . $e->getMessage());
         }
