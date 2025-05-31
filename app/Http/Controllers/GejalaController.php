@@ -11,7 +11,7 @@ class GejalaController extends Controller
     {
         try {
             $gejalas = Gejala::all();
-            return view('gejala.index', compact('gejalas'));
+            return view('pages.admin.gejala.index', compact('gejalas'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data gejala: ' . $e->getMessage());
         }
@@ -19,7 +19,7 @@ class GejalaController extends Controller
 
     public function create()
     {
-        return view('gejala.create');
+        return view('pages.admin.gejala.create');
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class GejalaController extends Controller
     {
         try{
             $gejala = Gejala::findOrFail($id);
-            return view('gejala.edit', compact('gejala'));
+            return view('pages.admin.gejala.edit', compact('gejala'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data gejala: ' . $e->getMessage());
         }
