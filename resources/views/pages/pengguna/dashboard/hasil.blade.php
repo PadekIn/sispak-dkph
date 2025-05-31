@@ -10,15 +10,24 @@
             <div class="bg-white shadow-md rounded-lg p-8">
                 <h3 class="text-lg font-bold mb-4 text-gray-800">Hasil Pengecekan</h3>
 
-                @if(isset($hasil) && count($hasil))
-                    <ul class="mb-6">
-                        @foreach($hasil as $item)
-                            <li class="mb-2 flex items-center">
-                                <span class="inline-block w-2 h-2 bg-gray-200 rounded-full mr-2"></span>
-                                <span class="text-gray-800">{{ $item }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
+                @if(isset($result))
+                    <div class="mb-4">
+                        <div class="font-semibold text-gray-700 mb-2">Gejala yang dipilih:</div>
+                        @if(isset($result['gejala']) && is_array($result['gejala']))
+                            <ul class="mb-4">
+                                @foreach($result['gejala'] as $gejala)
+                                    <li class="mb-1 text-gray-800">- {{ $gejala }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                        <div class="font-semibold text-gray-700 mb-2">Hasil Diagnosa:</div>
+                        <div class="text-indigo-700 font-bold mb-6">
+                            {{ $result['hasil_diagnosa'] ?? $result['hasil'] ?? '-' }}
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            Tanggal: {{ $result['tanggal'] ?? '-' }}
+                        </div>
+                    </div>
                 @else
                     <p class="text-gray-500 mb-6">Tidak ada hasil diagnosa yang ditemukan.</p>
                 @endif
