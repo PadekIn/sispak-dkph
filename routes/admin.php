@@ -8,10 +8,10 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
-
-    Route::get('/dashboard', function () {return view('pages.admin.dashboard');})->name('admin.dashboard');
+Route::middleware(['web', 'auth', 'isAdmin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pages.admin.dashboard.index');
+    })->name('admin.dashboard');
 
     Route::prefix('kerusakan')->group(function(){
         Route::get('/', [KerusakanController::class, 'index'])->name('admin.kerusakan.index');
@@ -40,15 +40,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::delete('/destroy/{id}', [PertanyaanController::class, 'destroy'])->name('admin.pertanyaan.destroy');
     });
 
-    Route::prefix('kerusakan')->group(function(){
-        Route::get('/', [KerusakanController::class, 'index'])->name('admin.kerusakan.index');
-        Route::get('/create', [KerusakanController::class, 'create'])->name('admin.kerusakan.create');
-        Route::post('/store', [KerusakanController::class, 'store'])->name('admin.kerusakan.store');
-        Route::get('/edit/{id}', [KerusakanController::class, 'edit'])->name('admin.kerusakan.edit');
-        Route::put('/update/{id}', [KerusakanController::class, 'update'])->name('admin.kerusakan.update');
-        Route::delete('/destroy/{id}', [KerusakanController::class, 'destroy'])->name('admin.kerusakan.destroy');
-    });
-
     Route::prefix('history')->group(function(){
         Route::get('/', [HistoryController::class, 'indexAdmin'])->name('admin.history.index');
     });
@@ -61,5 +52,4 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
         Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
     });
-
 });
