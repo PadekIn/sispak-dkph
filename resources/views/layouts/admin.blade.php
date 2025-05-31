@@ -15,11 +15,12 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="//unpkg.com/alpinejs" defer></script>
     </head>
-    <body class="bg-white min-h-screen flex">
+    <body x-data="{ open: true }" class="bg-white min-h-screen flex transition-all">
         @include('layouts.admin-navigation')
         <!-- Main Content -->
-        <main class="flex-1 min-h-screen bg-gray-50 p-8">
+        <main :class="open ? 'flex-1 min-h-screen ml-64 bg-gray-50 p-8 transition-all duration-300' : 'flex-1 min-h-screen ml-20 bg-gray-50 p-8 transition-all duration-300'">
             @isset($header)
                 <h1 class="text-2xl font-bold mb-6 text-gray-800">
                     {{ $header }}
