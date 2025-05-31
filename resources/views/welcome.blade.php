@@ -42,7 +42,7 @@
         <p class="text-sm text-gray-500 mb-6">Sistem Pakar Diagnosa Kerusakan Pada Handphone</p>
 
         <a href="{{ route('guest.diagnosa') }}"
-            class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-xl shadow-md hover:bg-gray-900 hover:scale-105 transform transition duration-300 ease-in-out">Mulai Kuesioner
+            class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-xl shadow-md hover:bg-gray-900 hover:scale-105 transform transition duration-300 ease-in-out">Mulai Diagnosa
         </a>
     </div>
 </body>

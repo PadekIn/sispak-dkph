@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <p class="text-gray-600">Silakan mulai diagnosa untuk membantu kami meningkatkan layanan.</p>
+                    <p class="text-gray-600 mb-4">Silakan pilih gejala yang Anda alami:</p>
 
-                    {{-- <form method="POST" action="{{ route('pengguna.hasil') }}">
+                    <form method="POST" action="{{ route('pengguna.diagnosa.submit') }}">
                         @csrf
                         @foreach ($gejalas as $gejala)
                             <div class="flex items-center mb-2">
@@ -22,7 +22,7 @@
                         <x-primary-button class="mt-4">
                             {{ __('Kirim Diagnosa') }}
                         </x-primary-button>
-                    </form> --}}
+                    </form>
 
                 </div>
             </div>
