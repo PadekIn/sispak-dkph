@@ -32,7 +32,7 @@ class GejalaController extends Controller
 
         try {
             Gejala::create($request->all());
-            return redirect()->route('gejala.index')->with('success', 'Gejala berhasil ditambahkan.');
+            return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menambahkan gejala: ' . $e->getMessage());
         }
@@ -58,7 +58,7 @@ class GejalaController extends Controller
         try {
             $gejala = Gejala::findOrFail($id);
             $gejala->update($request->all());
-            return redirect()->route('gejala.index')->with('success', 'Gejala berhasil diperbarui.');
+            return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memperbarui gejala: ' . $e->getMessage());
         }
@@ -69,7 +69,7 @@ class GejalaController extends Controller
         try {
             $gejala = Gejala::findOrFail($id);
             $gejala->delete();
-            return redirect()->route('gejala.index')->with('success', 'Gejala berhasil dihapus.');
+            return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menghapus gejala: ' . $e->getMessage());
         }
