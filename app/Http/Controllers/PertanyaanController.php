@@ -12,7 +12,7 @@ class PertanyaanController extends Controller
     {
         try {
             $pertanyaan = Pertanyaan::with('gejala')->get();
-            return view('pertanyaan.index', compact('pertanyaan'));
+            return view('pages.admin.pertanyaan.index', compact('pertanyaan'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data pertanyaan: ' . $e->getMessage());
         }
@@ -20,7 +20,7 @@ class PertanyaanController extends Controller
     public function create()
     {
         $gejalas = Gejala::all();
-        return view('pertanyaan.create', compact('gejalas'));
+        return view('pages.admin.pertanyaan.create', compact('gejalas'));
     }
     public function store(Request $request)
     {
@@ -41,7 +41,7 @@ class PertanyaanController extends Controller
         try {
             $pertanyaan = Pertanyaan::findOrFail($id);
             $gejalas = Gejala::all();
-            return view('pertanyaan.edit', compact('pertanyaan', 'gejalas'));
+            return view('pages.admin.pertanyaan.edit', compact('pertanyaan', 'gejalas'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data pertanyaan: ' . $e->getMessage());
         }
