@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
             UserAdminSeeder::class,
             UserOriginSeeder::class,
             GejalaSeeder::class,
-            // PertanyaanSeeder::class,
+        // PertanyaanSeeder::class,
             KerusakanSeeder::class,
             RuleSeeder::class,
-        ]);
+    ]);
     }
 }
