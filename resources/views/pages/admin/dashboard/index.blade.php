@@ -17,7 +17,7 @@
                             Selamat datang di Dashboard Admin <span class="font-semibold text-gray-600">SISPAK-DKPH</span>
                         </h3>
                     </div>
-                    <p class="text-gray-500 text-base">Anda dapat mengelola data kerusakan, gejala, pertanyaan, dan histori diagnosa serta mengelola user di sini.</p>
+                    <p class="text-gray-500 text-base">Anda dapat mengelola data kerusakan, gejala, dan histori diagnosa serta mengelola user di sini.</p>
                 </div>
             </div>
 
@@ -56,8 +56,11 @@
                         </div>
                     </div>
                     <h4 class="text-lg font-semibold mb-4 text-center w-full">Grafik Diagnosa Kerusakan per Bulan</h4>
-                    <div class="w-full flex justify-center" style="height:400px;">
-                        <canvas id="dataKerusakanPerBulan" style="width:100%;height:100%"></canvas>
+                    <div class="w-full flex justify-center items-center relative" style="height:400px;">
+                        <canvas id="dataKerusakanPerBulan" style="width:100%;height:100%;display:none"></canvas>
+                        <div id="noDataMessage" class="absolute inset-0 flex items-center justify-center text-gray-500 text-lg" style="display:none;">
+                            Belum ada riwayat diagnosa
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,6 +71,11 @@
     <script>
         let chartInstance = null;
         let allData = {};
+
+        function showNoData(show = true) {
+            document.getElementById('dataKerusakanPerBulan').style.display = show ? 'none' : '';
+            document.getElementById('noDataMessage').style.display = show ? 'flex' : 'none';
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             const btn = document.getElementById('btnFilterBulanTahun');
@@ -110,6 +118,8 @@
 
                     if (bulanTahunList.length > 0) {
                         renderChart(bulanTahunList[bulanTahunList.length - 1]);
+                    } else {
+                        showNoData(true);
                     }
                 });
         });
@@ -117,6 +127,17 @@
         function renderChart(bulanTahun) {
             const ctx = document.getElementById('dataKerusakanPerBulan').getContext('2d');
             const dataBulan = allData[bulanTahun] || { kerusakan: [], jumlah: [] };
+
+            if (!dataBulan.kerusakan.length || !dataBulan.jumlah.length || dataBulan.jumlah.reduce((a, b) => a + b, 0) === 0) {
+                if (chartInstance) {
+                    chartInstance.destroy();
+                    chartInstance = null;
+                }
+                showNoData(true);
+                return;
+            }
+
+            showNoData(false);
 
             if (chartInstance) {
                 chartInstance.destroy();
