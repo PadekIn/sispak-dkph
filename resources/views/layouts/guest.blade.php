@@ -7,7 +7,7 @@
 
         <title>SISPAK-DKPH</title>
         <!-- Favicon -->
-        <link rel="shortcut icon" href="./assets/img/logo-sispak-dkph.png" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('assets/img/logo-sispak-dkph.png') }}" type="image/x-icon">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
