@@ -58,9 +58,70 @@
                                                     @endforeach
                                                 </div>
                                             </td>
-                                            <td class="px-8 py-4 text-sm text-gray-500 w-auto align-top">
-                                                {{ $history->hasil_diagnosa }}
+                                            <td class="px-8 py-4 text-sm text-gray-700 w-auto align-top">
+                                                @php
+                                                    $hasilDiagnosa = json_decode($history->hasil_diagnosa, true);
+                                                @endphp
+
+                                                @if(is_array($hasilDiagnosa))
+                                                    <ul class="list-none pl-0 space-y-2">
+                                            @foreach($hasilDiagnosa as $item)
+                                                @php
+                                                    $kerusakan = $item['kerusakan'] ?? $item;
+                                                    $match = $item['match'] ?? null;
+                                                    $total = $item['total'] ?? null;
+
+                                                    $confidence = '-';
+                                                    $badgeClass = 'bg-gray-300 text-gray-800';
+
+                                                    if (is_numeric($match) && is_numeric($total) && $total > 0) {
+                                                        $persen = ($match / $total) * 100;
+
+                                                        if ($persen == 100) {
+                                                            $confidence = '';
+                                                            $badgeClass = 'bg-red-100 text-red-800';
+                                                        } elseif ($persen >= 50) {
+                                                            $confidence = '';
+                                                            $badgeClass = 'bg-yellow-100 text-yellow-800';
+                                                        } else {
+                                                            $confidence = '';
+                                                            $badgeClass = 'bg-green-100 text-green-800';
+                                                        }
+                                                    }
+                                                @endphp
+
+                                                <li class="border-b-2 border-gray-200">
+                                                    <div class="flex flex-wrap items-center gap-2">
+                                                        {{-- <span class="font-medium">{{ $kerusakan }}</span> --}}
+                                                        @if($match !== null && $total !== null)
+                                                            @php
+                                                                $persen = round(($match / $total) * 100, 0);
+                                                            @endphp
+                                                            <span class="font-minimum">
+                                                                Terindikasi
+                                                                <span class="font-bold text-gray-800 {{ $badgeClass }}">
+                                                                {{ $persen }}%
+                                                                </span>
+                                                                Kerusakan Pada
+                                                                <span class="font-bold text-gray-800">
+                                                                    {{ $kerusakan }}
+                                                                </span>
+                                                            </span>
+                                                            {{-- <span class="text-xs px-2 py-1 rounded {{ $badgeClass }}">
+                                                                {{ $confidence }}
+                                                            </span> --}}
+                                                        @endif
+                                                    </div>
+                                                </li>
+                                            @endforeach
+
+                                                    </ul>
+                                                @else
+                                                    {{ $history->hasil_diagnosa }}
+                                                @endif
                                             </td>
+
+
                                         </tr>
                                     @endforeach
                                 @endif

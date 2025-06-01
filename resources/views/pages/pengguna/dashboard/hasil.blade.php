@@ -20,10 +20,29 @@
                                 @endforeach
                             </ul>
                         @endif
-                        <div class="font-semibold text-gray-700 mb-2">Hasil Diagnosa:</div>
-                        <div class="text-indigo-700 font-bold mb-6">
-                            {{ $result['hasil_diagnosa'] ?? $result['hasil'] ?? '-' }}
-                        </div>
+                            <div class="font-semibold text-gray-700 mb-2">Hasil Diagnosa:</div>
+
+                            @if(is_array($result['hasil_diagnosa']))
+                                <ul class="mb-6">
+                                    @foreach($result['hasil_diagnosa'] as $diagnosa)
+                                        <li class="mb-2 text-gray-800">
+                                            - {{ $diagnosa['kerusakan'] ?? $diagnosa }}
+                                            @if(isset($diagnosa['match']) && isset($diagnosa['total']))
+                                            @php
+                                                $matchPercentage = ($diagnosa['match'] / $diagnosa['total']) * 100;
+                                            @endphp
+                                                <span class="text-sm text-gray-600">
+                                                    (Terindikasi {{ number_format($matchPercentage) }}% kerusakan pada {{ $diagnosa['kerusakan'] ?? $diagnosa }})
+                                                </span>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <div class="text-indigo-700 font-bold mb-6">
+                                    {{ $result['hasil_diagnosa'] }}
+                                </div>
+                            @endif
                         <div class="text-sm text-gray-500">
                             Tanggal: {{ $result['tanggal'] ?? '-' }}
                         </div>
