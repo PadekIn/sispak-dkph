@@ -8,12 +8,18 @@ use App\Models\Gejala;
 use App\Models\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
+use \App\Models\Kerusakan;
 
 class DiagnosaGuestController extends Controller
 {
-    public function diagnosa()
+    public function diagnosa(Request $request)
     {
         try {
+            $result = Session::get('guest_diagnosa_result');
+            if ($result) {
+                // Jika ada hasil diagnosa sebelumnya, hapus dari session
+                $request->session()->forget('guest_diagnosa_result');
+            }
             $gejalas = Gejala::all();
             return view('pages.guest.diagnosa', compact('gejalas'));
         } catch (\Exception $e) {
@@ -30,8 +36,8 @@ class DiagnosaGuestController extends Controller
         ]);
 
         $gejalaIds = $request->input('gejala');
-        $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->get();
-        $kerusakans = \App\Models\Kerusakan::with('rules')->get();
+        $gejalas = Gejala::whereIn('id', $gejalaIds)->get();
+        $kerusakans = Kerusakan::with('rules')->get();
 
         $hasilDiagnosa = [];
         foreach ($kerusakans as $kerusakan) {

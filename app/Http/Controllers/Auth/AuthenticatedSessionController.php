@@ -18,6 +18,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        // $result = Session::get('guest_diagnosa_result');
+        //     if ($result) {
+        //         // Jika ada hasil diagnosa sebelumnya, hapus dari session
+        //         Session::forget('guest_diagnosa_result');
+        //     }
         return view('auth.login');
     }
 

@@ -37,7 +37,10 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <!-- Hapus link Profile di sini -->
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -85,7 +88,10 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <!-- Hapus link Profile di sini -->
+                <x-responsive-nav-link :href="route('profile.edit')">
+                    {{ __('Profile') }}
+                </x-responsive-nav-link>
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
