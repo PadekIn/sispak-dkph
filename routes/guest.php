@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guest\DiagnosaGuestController;
 
-Route::prefix('guest')->group(function () {
+Route::middleware(['web', 'guest'])->prefix('guest')->group(function () {
     Route::get('/diagnosa', [DiagnosaGuestController::class, 'diagnosa'])->name('guest.diagnosa');
     Route::post('/diagnosa/submit', [DiagnosaGuestController::class, 'submit'])->name('guest.diagnosa.submit');
     Route::get('/hasil', [DiagnosaGuestController::class, 'hasil'])->name('guest.hasil');
