@@ -5,12 +5,15 @@ use App\Http\Controllers\Admin\PertanyaanController;
 use App\Http\Controllers\Admin\GejalaController;
 use App\Http\Controllers\Admin\HistoryController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web', 'auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('pages.admin.dashboard.index');
     })->name('admin.dashboard');
+
+    Route::get('/dashboard/data-kerusakan', [DashboardController::class, 'dataKerusakanPerBulan'])->name('dashboard.data-kerusakan');
 
     Route::prefix('kerusakan')->group(function(){
         Route::get('/', [KerusakanController::class, 'index'])->name('admin.kerusakan.index');

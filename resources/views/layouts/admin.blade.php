@@ -16,6 +16,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="//unpkg.com/alpinejs" defer></script>
+        @stack('scripts')
     </head>
     <body x-data="{ open: true }" class="bg-white min-h-screen flex transition-all">
         @include('layouts.admin-navigation')
