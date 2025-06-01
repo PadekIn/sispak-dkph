@@ -43,13 +43,11 @@
                                 @else
                                     @foreach ($histories as $history)
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 align-top">
                                                 {{ $history->user->name ?? 'User ID: '.$history->user_id }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <span>
-                                                    {{ \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y') }}
-                                                </span>
+                                            <td class="px-8 py-4 text-sm text-gray-500 align-top" style="width: 150px;">
+                                                {{ $history->tanggal ? \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y') : $history->created_at->format('d-m-Y') }}
                                             </td>
                                             <td class="px-8 py-4 text-sm text-gray-700 align-top" style="width: 820px;">
                                                 @php
@@ -64,8 +62,62 @@
                                                     @endforeach
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $history->hasil_diagnosa }}
+                                            <td class="px-8 py-4 text-sm text-gray-700 w-auto align-top">
+                                                @php
+                                                    $hasilDiagnosa = json_decode($history->hasil_diagnosa, true);
+                                                @endphp
+
+                                                @if(is_array($hasilDiagnosa))
+                                                    <ul class="list-none pl-0 space-y-2">
+                                                        @foreach($hasilDiagnosa as $item)
+                                                            @php
+                                                                $kerusakan = $item['kerusakan'] ?? $item;
+                                                                $match = $item['match'] ?? null;
+                                                                $total = $item['total'] ?? null;
+
+                                                                $confidence = '-';
+                                                                $badgeClass = 'bg-gray-300 text-gray-800';
+
+                                                                if (is_numeric($match) && is_numeric($total) && $total > 0) {
+                                                                    $persen = ($match / $total) * 100;
+
+                                                                    if ($persen == 100) {
+                                                                        $confidence = '';
+                                                                        $badgeClass = 'bg-red-100 text-red-800';
+                                                                    } elseif ($persen >= 50) {
+                                                                        $confidence = '';
+                                                                        $badgeClass = 'bg-yellow-100 text-yellow-800';
+                                                                    } else {
+                                                                        $confidence = '';
+                                                                        $badgeClass = 'bg-green-100 text-green-800';
+                                                                    }
+                                                                }
+                                                            @endphp
+
+                                                            <li class="border-b-2 border-gray-200">
+                                                                <div class="flex flex-wrap items-center gap-2">
+                                                                    @if($match !== null && $total !== null)
+                                                                        @php
+                                                                            $persen = round(($match / $total) * 100, 0);
+                                                                        @endphp
+                                                                        <span class="font-minimum">
+                                                                            Terindikasi
+                                                                            <span class="font-bold text-gray-800 {{ $badgeClass }}">
+                                                                                {{ $persen }}%
+                                                                            </span>
+                                                                            Kerusakan Pada
+                                                                            <span class="font-bold text-gray-800">
+                                                                                {{ $kerusakan }}
+                                                                            </span>
+                                                                        </span>
+                                                                    @endif
+                                                                </div>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    {{ $history->hasil_diagnosa }}
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
