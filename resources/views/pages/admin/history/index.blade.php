@@ -47,10 +47,23 @@
                                                 {{ $history->user->name ?? 'User ID: '.$history->user_id }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y H:i') }}
+                                                <span class="tanggal-riwayat"
+                                                    data-tanggal="{{ \Carbon\Carbon::parse($history->tanggal)->format('Y-m-d H:i:s') }}">
+                                                    {{ \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y H:i:s') }}
+                                                </span>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $history->gejala_terpilih }}
+                                            <td class="px-8 py-4 text-sm text-gray-700 align-top" style="width: 820px;">
+                                                @php
+                                                    $gejalaIds = json_decode($history->gejala_terpilih, true) ?? [];
+                                                    $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->pluck('nama_gejala')->toArray();
+                                                @endphp
+                                                <div class="flex flex-wrap gap-2">
+                                                    @foreach($gejalas as $gejala)
+                                                        <span class="inline-block bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">
+                                                            {{ $gejala }}
+                                                        </span>
+                                                    @endforeach
+                                                </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 {{ $history->hasil_diagnosa }}
@@ -61,12 +74,28 @@
                             </tbody>
                         </table>
                     </div>
-<!--
-                    @if ($histories->isEmpty())
-                        <p class="text-gray-600 mt-4">Belum ada riwayat diagnosa yang terdaftar.</p>
-                    @endif -->
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function updateTanggalRiwayat() {
+            document.querySelectorAll('.tanggal-riwayat').forEach(function(el) {
+                const tanggal = el.getAttribute('data-tanggal');
+                if (tanggal) {
+                    // Hitung selisih waktu dari tanggal riwayat ke sekarang
+                    const waktuRiwayat = new Date(tanggal.replace(/-/g, '/'));
+                    const now = new Date();
+                    // Tampilkan tanggal asli + jam berjalan (real time)
+                    const tanggalStr = waktuRiwayat.toLocaleDateString('id-ID');
+                    const jamStr = now.toLocaleTimeString('id-ID');
+                    el.textContent = tanggalStr + ' ' + jamStr;
+                }
+            });
+        }
+        setInterval(updateTanggalRiwayat, 1000);
+        updateTanggalRiwayat();
+</script>
 </x-admin-layout>
+
+
