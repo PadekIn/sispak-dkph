@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Models\Kerusakan;
 
 class DiagnosaPenggunaController extends Controller
 {
@@ -39,15 +40,49 @@ class DiagnosaPenggunaController extends Controller
             // Ambil objek Gejala berdasarkan ID yang dipilih
             $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->get();
 
-            // Anda akan tambahkan logika diagnosa di sini
-            $hasil_diagnosa = "Hasil diagnosa placeholder untuk pengguna"; // Ganti dengan hasil sebenarnya
+            $kerusakans = \App\Models\Kerusakan::with('rules')->get();
+
+            $hasilDiagnosa = [];
+            foreach ($kerusakans as $kerusakan) {
+                $match = 0;
+                $total = count($kerusakan->rules);
+
+                foreach ($kerusakan->rules as $rule) {
+                    if (in_array($rule->gejala_id, $gejalaIds)) {
+                        $match++;
+                    }
+                }
+
+                if ($match > 0) {
+                    $hasilDiagnosa[] = [
+                        'kerusakan' => $kerusakan->nama_kerusakan,
+                        'jenis_kerusakan' => $kerusakan->jenis_kerusakan,
+                        'solusi' => $kerusakan->solusi,
+                        'match' => $match,
+                        'total' => $total
+                    ];
+                }
+            }
+
+            // Urutkan hasil berdasarkan persentase kecocokan tertinggi
+            usort($hasilDiagnosa, function($a, $b) {
+                $percentA = ($a['match'] / $a['total']) * 100;
+                $percentB = ($b['match'] / $b['total']) * 100;
+                return $percentB <=> $percentA;
+            });
+
+            $result = [
+                'gejala' => $gejalas->pluck('nama_gejala')->toArray(),
+                'hasil_diagnosa' => $hasilDiagnosa,
+                'tanggal' => now()->format('Y-m-d')
+            ];
 
             // Simpan ke histori
             History::create([
                 'user_id' => Auth::id(),
                 'tanggal' => now(),
                 'gejala_terpilih' => json_encode($gejalas->pluck('nama_gejala')->toArray()), // Simpan nama gejala dalam format JSON
-                'hasil_diagnosa' => $hasil_diagnosa,
+                'hasil_diagnosa' => json_encode($hasilDiagnosa),
             ]);
 
             return redirect()->route('pengguna.hasil')->with('success', 'Diagnosa berhasil diproses.');
