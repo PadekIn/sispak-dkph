@@ -38,11 +38,11 @@
                             <x-input-label for="jenis_kerusakan" :value="__('Jenis Kerusakan')" />
                             <select id="jenis_kerusakan" name="jenis_kerusakan" class="block mt-1 w-full" required>
                                 <option value="">-- Pilih jenis kerusakan --</option>
-                                <option value="batre" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'batre' ? 'selected' : '' }}>batre</option>
-                                <option value="lcd" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'lcd' ? 'selected' : '' }}>lcd</option>
-                                <option value="konektor_charger" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'konektor_charger' ? 'selected' : '' }}>konektor_charger</option>
-                                <option value="kamera" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'kamera' ? 'selected' : '' }}>kamera</option>
-                                <option value="mesin" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'mesin' ? 'selected' : '' }}>mesin</option>
+                                <option value="batre" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'Baterai' ? 'selected' : '' }}>Baterai</option>
+                                <option value="lcd" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'LCD' ? 'selected' : '' }}>LCD</option>
+                                <option value="konektor_charger" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'Konektor Charger' ? 'selected' : '' }}>Konektor Charger</option>
+                                <option value="kamera" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'Kamera' ? 'selected' : '' }}>Kamera</option>
+                                <option value="mesin" {{ old('jenis_kerusakan', $kerusakans->jenis_kerusakan) == 'Mesin' ? 'selected' : '' }}>Mesin</option>
                             </select>
                             <x-input-error class="mt-2" :messages="$errors->get('jenis_kerusakan')" />
                         </div>
