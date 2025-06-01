@@ -106,31 +106,24 @@
 
                                                 <li class="border-b-2 border-gray-200">
                                                     <div class="flex flex-wrap items-center gap-2">
+                                                        {{-- <span class="font-medium">{{ $kerusakan }}</span> --}}
                                                         @if($match !== null && $total !== null)
                                                             @php
                                                                 $persen = round(($match / $total) * 100, 0);
-                                                                $confidenceText = '';
-                                                                $badgeClass = 'bg-gray-300 text-gray-800'; // Default
-
-                                                                if ($total > 0) {
-                                                                    if ($persen >= 50) {
-                                                                        $confidenceText = 'Mungkin';
-                                                                        $badgeClass = 'bg-yellow-100 text-yellow-800';
-                                                                    } else {
-                                                                        $confidenceText = 'Kemungkinan Rendah';
-                                                                        $badgeClass = 'bg-red-100 text-red-800';
-                                                                    }
-                                                                }
                                                             @endphp
                                                             <span class="font-minimum">
-                                                                <span class="font-bold text-gray-800">{{ $kerusakan }}</span>
-                                                                ({{ $persen }}% gejala cocok)
-                                                            </span>
-                                                            @if($confidenceText)
-                                                                <span class="text-xs px-2 py-1 rounded {{ $badgeClass }}">
-                                                                    {{ $confidenceText }}
+                                                                Terindikasi
+                                                                <span class="font-bold text-gray-800 {{ $badgeClass }}">
+                                                                {{ $persen }}%
                                                                 </span>
-                                                            @endif
+                                                                Kerusakan Pada
+                                                                <span class="font-bold text-gray-800">
+                                                                    {{ $kerusakan }}
+                                                                </span>
+                                                            </span>
+                                                            {{-- <span class="text-xs px-2 py-1 rounded {{ $badgeClass }}">
+                                                                {{ $confidence }}
+                                                            </span> --}}
                                                         @endif
                                                     </div>
                                                 </li>

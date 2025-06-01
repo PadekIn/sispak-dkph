@@ -38,9 +38,9 @@ class DiagnosaPenggunaController extends Controller
             ]);
             $gejalaIds = $request->gejala;
             // Ambil objek Gejala berdasarkan ID yang dipilih
-            $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->get();
+            $gejalas = Gejala::whereIn('id', $gejalaIds)->get();
 
-            $kerusakans = \App\Models\Kerusakan::with('rules')->get();
+            $kerusakans = Kerusakan::with('rules')->get();
 
             $hasilDiagnosa = [];
             foreach ($kerusakans as $kerusakan) {
@@ -55,7 +55,7 @@ class DiagnosaPenggunaController extends Controller
 
                 if ($match > 0) {
                     $hasilDiagnosa[] = [
-                        'kerusakan' => $kerusakan->nama_kerusakan,
+                        'kerusakan' => $kerusakan->jenis_kerusakan,
                         'jenis_kerusakan' => $kerusakan->jenis_kerusakan,
                         'solusi' => $kerusakan->solusi,
                         'match' => $match,
