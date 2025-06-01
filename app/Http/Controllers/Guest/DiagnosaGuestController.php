@@ -65,7 +65,7 @@ class DiagnosaGuestController extends Controller
         $result = [
             'gejala' => $gejalas->pluck('nama_gejala')->toArray(),
             'hasil_diagnosa' => $hasilDiagnosa,
-            'tanggal' => now()->format('Y-m-d H:i:s')
+            'tanggal' => now()->format('Y-m-d')
         ];
 
         // Simpan hasil diagnosa di session

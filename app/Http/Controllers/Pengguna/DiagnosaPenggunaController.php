@@ -69,7 +69,7 @@ class DiagnosaPenggunaController extends Controller
                 $result = [
                     'gejala' => json_decode($latestHistory->gejala_terpilih, true) ?? [],
                     'hasil_diagnosa' => json_decode($latestHistory->hasil_diagnosa, true) ?? [],
-                    'tanggal' => \Carbon\Carbon::parse($latestHistory->tanggal)->format('d-m-Y H:i:s'),
+                    'tanggal' => \Carbon\Carbon::parse($latestHistory->tanggal)->format('d-m-Y'),
                 ];
             } else {
                 // Jika tidak ada histori, arahkan kembali ke halaman diagnosa
