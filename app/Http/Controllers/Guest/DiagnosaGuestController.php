@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gejala;
+use App\Models\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 
@@ -23,20 +24,61 @@ class DiagnosaGuestController extends Controller
 
     public function submit(Request $request)
     {
-        try {
-            // Logika submit diagnosa akan ditambahkan di sini nanti
-            // Untuk saat ini, kita bisa kembalikan respons sederhana atau redirect
-            return redirect()->route('guest.hasil')->with('success', 'Diagnosa berhasil diproses (placeholder).');
-        } catch (\Exception $e) {
-            Log::error('Error submitting diagnosa: ' . $e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat memproses diagnosa.');
+        $request->validate([
+            'gejala' => 'required|array',
+            'gejala.*' => 'exists:gejalas,id'
+        ]);
+
+        $gejalaIds = $request->input('gejala');
+        $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->get();
+        $kerusakans = \App\Models\Kerusakan::with('rules')->get();
+
+        $hasilDiagnosa = [];
+        foreach ($kerusakans as $kerusakan) {
+            $match = 0;
+            $total = count($kerusakan->rules);
+
+            foreach ($kerusakan->rules as $rule) {
+                if (in_array($rule->gejala_id, $gejalaIds)) {
+                    $match++;
+                }
+            }
+
+            if ($match > 0) {
+                $hasilDiagnosa[] = [
+                    'kerusakan' => $kerusakan->nama_kerusakan,
+                    'jenis_kerusakan' => $kerusakan->jenis_kerusakan,
+                    'solusi' => $kerusakan->solusi,
+                    'match' => $match,
+                    'total' => $total
+                ];
+            }
         }
+
+        // Urutkan hasil berdasarkan persentase kecocokan tertinggi
+        usort($hasilDiagnosa, function($a, $b) {
+            $percentA = ($a['match'] / $a['total']) * 100;
+            $percentB = ($b['match'] / $b['total']) * 100;
+            return $percentB <=> $percentA;
+        });
+
+        $result = [
+            'gejala' => $gejalas->pluck('nama_gejala')->toArray(),
+            'hasil_diagnosa' => $hasilDiagnosa,
+            'tanggal' => now()->format('Y-m-d H:i:s')
+        ];
+
+        // Simpan hasil diagnosa di session
+        session(['guest_diagnosa_result' => $result]);
+
+        // Redirect ke halaman login dengan pesan
+        return redirect()->route('login')->with('info', 'Silakan login atau register untuk menyimpan hasil diagnosa Anda.');
     }
 
     public function hasil()
     {
         try {
-            $result = Session::get('diagnosa_result');
+            $result = Session::get('guest_diagnosa_result');
             if (!$result) {
                 return redirect()->route('guest.diagnosa')->with('error', 'Silakan lakukan diagnosa terlebih dahulu');
             }
@@ -49,12 +91,7 @@ class DiagnosaGuestController extends Controller
 
     public function histori()
     {
-        try {
-            // Logika histori akan ditambahkan di sini nanti
-            return view('pages.guest.histori');
-        } catch (\Exception $e) {
-            Log::error('Error loading histori page: ' . $e->getMessage());
-            return redirect('/')->with('error', 'Terjadi kesalahan saat memuat halaman histori.');
-        }
+        // Redirect ke halaman login dengan pesan
+        return redirect()->route('login')->with('info', 'Silakan login terlebih dahulu untuk melihat histori diagnosa Anda.');
     }
 }

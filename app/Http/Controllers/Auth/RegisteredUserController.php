@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -39,13 +39,38 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'pengguna'
         ]);
 
-        // event(new Registered($user));
+        event(new Registered($user));
 
-        // Auth::login($user);
+        Auth::login($user);
 
-        // return redirect(route('login', absolute: false));
-        return redirect()->route('login')->with('success', 'Berhasil mendaftar, silakan masuk menggunakan akun Anda.');
+        // Cek apakah ada hasil diagnosa guest di session
+        if ($guestDiagnosa = session('guest_diagnosa_result')) {
+            try {
+                // Buat history baru dengan hasil diagnosa guest
+                \App\Models\History::create([
+                    'user_id' => $user->id,
+                    'gejala_terpilih' => json_encode($guestDiagnosa['gejala']),
+                    'hasil_diagnosa' => json_encode($guestDiagnosa['hasil_diagnosa']),
+                    'tanggal' => $guestDiagnosa['tanggal']
+                ]);
+
+                // Hapus hasil diagnosa dari session
+                session()->forget('guest_diagnosa_result');
+
+                // Redirect ke halaman hasil dengan pesan sukses
+                return redirect()->route('pengguna.hasil')->with([
+                    'success' => 'Registrasi berhasil dan hasil diagnosa sebelumnya telah disimpan.',
+                    'result' => $guestDiagnosa
+                ]);
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Error saving guest diagnosa after registration: ' . $e->getMessage());
+                return redirect()->route('pengguna.diagnosa')->with('error', 'Terjadi kesalahan saat menyimpan hasil diagnosa.');
+            }
+        }
+
+        return redirect()->route('pengguna.diagnosa');
     }
 }

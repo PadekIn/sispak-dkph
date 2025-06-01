@@ -12,9 +12,9 @@ class History extends Model
 
     protected $fillable = [
         'user_id',
-        'kerusakan_id',
-        'gejala_ids',
-        'hasil'
+        'tanggal',
+        'gejala_terpilih',
+        'hasil_diagnosa'
     ];
 
     public function user() {

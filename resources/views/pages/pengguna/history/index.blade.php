@@ -47,15 +47,29 @@
                                             </td>
                                             <td class="px-8 py-4 text-sm text-gray-700 align-top" style="width: 820px;">
                                                 @php
-                                                    $gejalaIds = json_decode($history->gejala_terpilih, true) ?? [];
-                                                    $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->pluck('nama_gejala')->toArray();
+                                                    $decodedGejala = json_decode($history->gejala_terpilih, true) ?? [];
+                                                    $gejalas = [];
+
+                                                    if (is_array($decodedGejala) && !empty($decodedGejala)) {
+                                                        // Cek apakah elemen pertama adalah integer (indikasi ID)
+                                                        if (isset($decodedGejala[0]) && is_int($decodedGejala[0])) {
+                                                            // Jika ID, ambil nama gejala dari database
+                                                            $gejalaIds = $decodedGejala;
+                                                            $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->pluck('nama_gejala')->toArray();
+                                                        } else {
+                                                            // Jika bukan ID, asumsikan sudah dalam bentuk nama gejala
+                                                            $gejalas = $decodedGejala;
+                                                        }
+                                                    }
                                                 @endphp
                                                 <div class="flex flex-wrap gap-2">
+                                                    @if(is_array($gejalas))
                                                     @foreach($gejalas as $gejala)
                                                         <span class="inline-block bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">
                                                             {{ $gejala }}
                                                         </span>
                                                     @endforeach
+                                                    @endif
                                                 </div>
                                             </td>
                                             <td class="px-8 py-4 text-sm text-gray-700 w-auto align-top">

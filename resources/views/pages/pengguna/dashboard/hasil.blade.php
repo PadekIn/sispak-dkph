@@ -8,23 +8,32 @@
     <div class="py-8">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-md rounded-lg p-8">
+                @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endif
+
                 <h3 class="text-lg font-bold mb-4 text-gray-800">Hasil Pengecekan</h3>
 
-                @if(isset($result))
+                @if(isset($result) || session('result'))
+                    @php
+                        $currentResult = $result ?? session('result');
+                    @endphp
                     <div class="mb-4">
                         <div class="font-semibold text-gray-700 mb-2">Gejala yang dipilih:</div>
-                        @if(isset($result['gejala']) && is_array($result['gejala']))
+                        @if(isset($currentResult['gejala']) && is_array($currentResult['gejala']))
                             <ul class="mb-4">
-                                @foreach($result['gejala'] as $gejala)
+                                @foreach($currentResult['gejala'] as $gejala)
                                     <li class="mb-1 text-gray-800">- {{ $gejala }}</li>
                                 @endforeach
                             </ul>
                         @endif
                             <div class="font-semibold text-gray-700 mb-2">Hasil Diagnosa:</div>
 
-                            @if(is_array($result['hasil_diagnosa']))
+                            @if(is_array($currentResult['hasil_diagnosa']))
                                 <ul class="mb-6">
-                                    @foreach($result['hasil_diagnosa'] as $diagnosa)
+                                    @foreach($currentResult['hasil_diagnosa'] as $diagnosa)
                                         <li class="mb-2 text-gray-800">
                                             - {{ $diagnosa['kerusakan'] ?? $diagnosa }}
                                             @if(isset($diagnosa['match']) && isset($diagnosa['total']))
@@ -40,11 +49,11 @@
                                 </ul>
                             @else
                                 <div class="text-indigo-700 font-bold mb-6">
-                                    {{ $result['hasil_diagnosa'] }}
+                                    {{ $currentResult['hasil_diagnosa'] }}
                                 </div>
                             @endif
                         <div class="text-sm text-gray-500">
-                            Tanggal: {{ $result['tanggal'] ?? '-' }}
+                            Tanggal: {{ $currentResult['tanggal'] ?? '-' }}
                         </div>
                     </div>
                 @else

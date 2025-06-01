@@ -2,6 +2,14 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <!-- Pesan untuk guest yang baru diagnosa -->
+    @if(session('info'))
+        <div class="mb-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4" role="alert">
+            <p>{{ session('info') }}</p>
+        </div>
+    @endif
+
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 

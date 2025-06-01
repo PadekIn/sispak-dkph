@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Pengguna;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Gejala;
+use Illuminate\Support\Facades\Session;
+use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
-use App\Models\Gejala;
-use App\Models\History;
-use App\Models\Kerusakan;
-use App\Models\Rule;
 
 class DiagnosaPenggunaController extends Controller
 {
@@ -27,77 +25,62 @@ class DiagnosaPenggunaController extends Controller
 
     public function submit(Request $request)
     {
-        $request->validate([
-            'gejala' => 'required|array|min:1',
-            'gejala.*' => 'exists:gejalas,id',
-        ]);
+        try {
+            // Logika submit diagnosa untuk pengguna
+            // Ini akan mencakup validasi, pencarian kerusakan berdasarkan gejala,
+            // dan menyimpan hasil ke tabel histories yang terkait dengan user ID.
 
-        $gejalaInput = collect($request->input('gejala', [])); // gejala dari user
-        $allRules = Rule::with('kerusakan')->get(); // ambil semua rule beserta kerusakan
+            // Placeholder untuk saat ini:
+            $request->validate([
+                'gejala' => 'required|array',
+                'gejala.*' => 'exists:gejalas,id'
+            ]);
+            $gejalaIds = $request->gejala;
+            // Ambil objek Gejala berdasarkan ID yang dipilih
+            $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->get();
 
-        // Hitung kecocokan antara input dan rule
-        $scoreKerusakan = [];
+            // Anda akan tambahkan logika diagnosa di sini
+            $hasil_diagnosa = "Hasil diagnosa placeholder untuk pengguna"; // Ganti dengan hasil sebenarnya
 
-        foreach ($allRules as $rule) {
-            $kerusakanId = $rule->kerusakan_id;
+            // Simpan ke histori
+            History::create([
+                'user_id' => Auth::id(),
+                'tanggal' => now(),
+                'gejala_terpilih' => json_encode($gejalas->pluck('nama_gejala')->toArray()), // Simpan nama gejala dalam format JSON
+                'hasil_diagnosa' => $hasil_diagnosa,
+            ]);
 
-            // Kumpulkan semua gejala yg terkait dg kerusakan ini
-            if (!isset($scoreKerusakan[$kerusakanId])) {
-                $scoreKerusakan[$kerusakanId] = [
-                    'kerusakan' => $rule->kerusakan->jenis_kerusakan,
-                    'match' => 0,
-                    'total' => 0,
-                ];
-            }
-
-            $scoreKerusakan[$kerusakanId]['total']++;
-
-            if ($gejalaInput->contains($rule->gejala_id)) {
-                $scoreKerusakan[$kerusakanId]['match']++;
-            }
+            return redirect()->route('pengguna.hasil')->with('success', 'Diagnosa berhasil diproses.');
+        } catch (\Exception $e) {
+            Log::error('Error submitting pengguna diagnosa: ' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat memproses diagnosa pengguna.');
         }
-
-        // Filter: hanya ambil yang punya minimal 1 kecocokan
-        $hasilDiagnosa = collect($scoreKerusakan)
-            ->filter(fn($val) => $val['match'] > 0)
-            ->sortByDesc('match') // urutkan berdasarkan gejala yang cocok terbanyak
-            ->values()
-            ->toArray();
-
-        if (empty($hasilDiagnosa)) {
-            $hasilDiagnosa[] = ['kerusakan' => 'Tidak ditemukan kerusakan yang sesuai', 'match' => 0, 'total' => 0];
-        }
-
-        // Simpan ke session
-        session([
-            'diagnosa_result' => [
-                'gejala' => Gejala::whereIn('id', $gejalaInput)->pluck('nama_gejala')->toArray(),
-                'hasil_diagnosa' => $hasilDiagnosa,
-                'tanggal' => now()->format('Y-m-d'),
-            ]
-        ]);
-
-        // Simpan ke history
-        $history = new History();
-        $history->user_id = Auth::id();
-        $history->gejala_terpilih = json_encode($gejalaInput);
-        $history->hasil_diagnosa = json_encode($hasilDiagnosa);
-        $history->tanggal = now();
-        $history->save();
-
-        return redirect()->route('pengguna.hasil');
     }
-
 
     public function hasil()
     {
-        $result = session('diagnosa_result');
+        try {
+            // Ambil histori diagnosa terbaru untuk pengguna yang sedang login
+            $latestHistory = History::where('user_id', Auth::id())->latest()->first();
 
-        if (!$result) {
-            return redirect()->route('pengguna.diagnosa')->with('error', 'Silakan lakukan diagnosa terlebih dahulu.');
+            if ($latestHistory) {
+                // Format data histori agar sesuai dengan struktur yang diharapkan oleh view
+                // Jika hasil_diagnosa dan gejala_terpilih disimpan sebagai JSON string
+                $result = [
+                    'gejala' => json_decode($latestHistory->gejala_terpilih, true) ?? [],
+                    'hasil_diagnosa' => json_decode($latestHistory->hasil_diagnosa, true) ?? [],
+                    'tanggal' => \Carbon\Carbon::parse($latestHistory->tanggal)->format('d-m-Y H:i:s'),
+                ];
+            } else {
+                // Jika tidak ada histori, arahkan kembali ke halaman diagnosa
+                return redirect()->route('pengguna.diagnosa')->with('error', 'Belum ada hasil diagnosa tersimpan. Silakan lakukan diagnosa terlebih dahulu.');
+            }
+
+            return view('pages.pengguna.dashboard.hasil', compact('result'));
+        } catch (\Exception $e) {
+            Log::error('Error loading pengguna hasil page: ' . $e->getMessage());
+            return redirect('/')->with('error', 'Terjadi kesalahan saat memuat halaman hasil pengguna.');
         }
-
-        return view('pages.pengguna.dashboard.hasil', compact('result'));
     }
 
     public function histori()
