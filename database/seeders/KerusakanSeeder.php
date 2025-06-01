@@ -13,7 +13,7 @@ class KerusakanSeeder extends Seeder
      */
     public function run(): void
     {
-        Kerusakan::create(['nama_kerusakan' => 'Kerusakan Baterai', 'jenis_kerusakan' => 'batre', 'solusi' => 'Ganti batrai baru']);
+        Kerusakan::create(['nama_kerusakan' => 'Kerusakan Baterai', 'jenis_kerusakan' => 'batre', 'solusi' => 'Ganti baterai baru']);
         Kerusakan::create(['nama_kerusakan' => 'Kerusakan LCD', 'jenis_kerusakan' => 'lcd', 'solusi' => 'Ganti LCD baru']);
         Kerusakan::create(['nama_kerusakan' => 'Kerusakan Konektor Charger', 'jenis_kerusakan' => 'konektor_charger', 'solusi' => 'Perbaikan konektor charger']);
         Kerusakan::create(['nama_kerusakan' => 'Kerusakan Kamera', 'jenis_kerusakan' => 'kamera', 'solusi' => 'Perbaikan kamera']);
