@@ -29,15 +29,7 @@ class AuthenticatedSessionController extends Controller
 
             $request->session()->regenerate();
 
-            $user = Auth::user();
-
-            if ($user->role==="admin") {
-                return redirect()->intended(route('admin.dashboard', absolute: false));
-            } elseif ($user->role==="pengguna") {
-                return redirect()->intended(route('pengguna.diagnosa', absolute: false));
-            } else {
-                return redirect()->intended(route('login'));
-            }
+            return redirect()->intended(route('home', absolute: false));
 
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['email' => 'Login failed: ' . $e->getMessage()]);
@@ -55,6 +47,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('welcome');
     }
 }

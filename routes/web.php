@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
+// Rute /home untuk redirect berdasarkan status login
+Route::get('/home', function () {
     if (Auth::check()) {
         if (Auth::user()->role === 'admin') {
             return redirect()->route('admin.dashboard');
@@ -15,7 +20,7 @@ Route::get('/', function () {
         }
     }
     return redirect()->route('guest.diagnosa');
-});
+})->name('home');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
