@@ -51,11 +51,11 @@
                                             </td>
                                             <td class="px-8 py-4 text-sm text-gray-700 align-top" style="width: 820px;">
                                                 @php
-                                                    $gejalaIds = json_decode($history->gejala_terpilih, true) ?? [];
-                                                    $gejalas = \App\Models\Gejala::whereIn('id', $gejalaIds)->pluck('nama_gejala')->toArray();
+
+                                                    $gejalaNames = json_decode($history->gejala_terpilih, true) ?? [];
                                                 @endphp
                                                 <div class="flex flex-wrap gap-2">
-                                                    @foreach($gejalas as $gejala)
+                                                    @foreach($gejalaNames as $gejala)
                                                         <span class="inline-block bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">
                                                             {{ $gejala }}
                                                         </span>
