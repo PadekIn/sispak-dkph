@@ -47,9 +47,8 @@
                                                 {{ $history->user->name ?? 'User ID: '.$history->user_id }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <span class="tanggal-riwayat"
-                                                    data-tanggal="{{ \Carbon\Carbon::parse($history->tanggal)->format('Y-m-d H:i:s') }}">
-                                                    {{ \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y H:i:s') }}
+                                                <span>
+                                                    {{ \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y') }}
                                                 </span>
                                             </td>
                                             <td class="px-8 py-4 text-sm text-gray-700 align-top" style="width: 820px;">
@@ -78,24 +77,6 @@
             </div>
         </div>
     </div>
-    <script>
-        function updateTanggalRiwayat() {
-            document.querySelectorAll('.tanggal-riwayat').forEach(function(el) {
-                const tanggal = el.getAttribute('data-tanggal');
-                if (tanggal) {
-                    // Hitung selisih waktu dari tanggal riwayat ke sekarang
-                    const waktuRiwayat = new Date(tanggal.replace(/-/g, '/'));
-                    const now = new Date();
-                    // Tampilkan tanggal asli + jam berjalan (real time)
-                    const tanggalStr = waktuRiwayat.toLocaleDateString('id-ID');
-                    const jamStr = now.toLocaleTimeString('id-ID');
-                    el.textContent = tanggalStr + ' ' + jamStr;
-                }
-            });
-        }
-        setInterval(updateTanggalRiwayat, 1000);
-        updateTanggalRiwayat();
-</script>
 </x-admin-layout>
 
 

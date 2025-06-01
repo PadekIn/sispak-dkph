@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\KerusakanController;
-use App\Http\Controllers\RuleController;
 use App\Http\Controllers\Admin\PertanyaanController;
 use App\Http\Controllers\Admin\GejalaController;
 use App\Http\Controllers\Admin\HistoryController;
