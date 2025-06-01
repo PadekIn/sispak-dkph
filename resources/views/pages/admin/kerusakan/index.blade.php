@@ -46,11 +46,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $kerusakan->solusi }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="{{ route('admin.kerusakan.edit', $kerusakan->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
-                                            <form action="{{ route('admin.kerusakan.destroy', $kerusakan->id) }}" method="POST" class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Yakin hapus kerusakan ini?')">Hapus</button>
-                                            </form>
+                                            <button type="button"
+                                                class="text-red-600 hover:text-red-900"
+                                                onclick="confirmHapus('{{ route('admin.kerusakan.destroy', $kerusakan->id) }}')">
+                                                Hapus
+                                            </button>
                                         </td>
                                     </tr>
                                 @empty
@@ -69,4 +69,43 @@
             </div>
         </div>
     </div>
+
+    <x-modal name="hapus-modal">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Hapus</h2>
+                <button type="button"
+                    onclick="window.dispatchEvent(new CustomEvent('close-modal', {detail: 'hapus-modal'}))"
+                    class="text-gray-400 hover:text-gray-700 transition"
+                    aria-label="Tutup">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <p class="mb-4 text-gray-600">Apakah Anda yakin ingin menghapus kerusakan ini?</p>
+            <div class="flex justify-end gap-2">
+                <button type="button"
+                    onclick="window.dispatchEvent(new CustomEvent('close-modal', {detail: 'hapus-modal'}))"
+                    class="inline-flex items-center px-4 py-2 border-gray-800 bg-white border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                    Batal
+                </button>
+                <form id="form-hapus" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </x-modal>
+
+    <script>
+        function confirmHapus(url) {
+            document.getElementById('form-hapus').setAttribute('action', url);
+            window.dispatchEvent(new CustomEvent('open-modal', {detail: 'hapus-modal'}));
+        }
+    </script>
 </x-admin-layout>
