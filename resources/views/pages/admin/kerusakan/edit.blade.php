@@ -60,7 +60,7 @@
                                 Batal
                             </a>
                             <x-primary-button>
-                                {{ __('Update Kerusakan') }}
+                                {{ __('Perbarui Kerusakan') }}
                             </x-primary-button>
                         </div>
                     </form>
