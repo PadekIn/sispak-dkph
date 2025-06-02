@@ -57,17 +57,10 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="3" class="text-center py-4">Belum ada data gejala.</td>
-                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-
-                    @if ($gejalas->isEmpty())
-                        <p class="text-gray-600 mt-4">Belum ada gejala yang terdaftar.</p>
-                    @endif
                 </div>
             </div>
         </div>

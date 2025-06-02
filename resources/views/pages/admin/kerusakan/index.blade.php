@@ -59,17 +59,10 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center py-4">Belum ada data kerusakan.</td>
-                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-
-                    @if ($kerusakans->isEmpty())
-                        <p class="text-gray-600 mt-4">Belum ada kerusakan yang terdaftar.</p>
-                    @endif
                 </div>
             </div>
         </div>
