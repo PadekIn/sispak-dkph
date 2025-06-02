@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <h4 class="text-lg font-semibold mb-4 text-center w-full">Grafik Diagnosa Kerusakan per Bulan</h4>
+                    <h4 class="text-lg font-semibold mb-4 text-center w-full">Grafik Histori Diagnosa Kerusakan per Bulan</h4>
                     <div class="w-full flex justify-center items-center relative" style="height:400px;">
                         <canvas id="dataKerusakanPerBulan" style="width:100%;height:100%;display:none"></canvas>
                         <div id="noDataMessage" class="absolute inset-0 flex items-center justify-center text-gray-500 text-lg" style="display:none;">
