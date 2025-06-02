@@ -20,7 +20,7 @@
                             </div>
                         @endforeach
                         <x-primary-button class="mt-4">
-                            {{ __('Kirim Diagnosa') }}
+                            {{ __('Kirim Gejala') }}
                         </x-primary-button>
                     </form>
 

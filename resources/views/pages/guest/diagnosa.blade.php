@@ -20,31 +20,9 @@
                             </div>
                         @endforeach
                         <button type="submit" class="inline-flex items-center mt-4 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Kirim Diagnosa
+                            Kirim Gejala
                         </button>
                     </form>
-
-                    <x-modal name="login-modal">
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-2">
-                                <h2 class="text-lg font-semibold text-gray-800">Login Diperlukan</h2>
-                                <button type="button"
-                                    onclick="window.dispatchEvent(new CustomEvent('close-modal', {detail: 'login-modal'}))"
-                                    class="text-gray-400 hover:text-gray-700 transition"
-                                    aria-label="Tutup">
-                                    <!-- Heroicons X Mark (Exit) -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="mb-4 text-gray-600">Hasil diagnosa Anda telah disimpan. Silakan login atau daftar untuk menyimpan hasil diagnosa secara permanen.</p>
-                            <div class="flex justify-end gap-2">
-                                <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 border-gray-800 bg-white border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Registrasi</a>
-                                <a href="{{ route('login') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Login</a>
-                            </div>
-                        </div>
-                    </x-modal>
 
                     <script>
                         document.getElementById('diagnosaForm').addEventListener('submit', function(e) {

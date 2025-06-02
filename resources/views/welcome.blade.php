@@ -35,15 +35,19 @@
     </style>
 </head>
 <body class="bg-gray-100 to-white min-h-screen flex items-center justify-center px-4">
-     <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center fade-in">
+     <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-xl w-full text-center fade-in">
         <img src="{{ asset('assets/img/logo-sispak-dkph.png') }}" alt="Logo SISPAK-DKPH" class="mx-auto mb-6 h-24 drop-shadow-md">
 
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">Selamat Datang!</h1>
-        <p class="text-sm text-gray-500 mb-6">Sistem Pakar Diagnosa Kerusakan Pada Handphone</p>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Selamat Datang di SISPAK-DKPH!</h1>
+        <p class="text-sm text-gray-700 mb-6"><b>SISPAK-DKPH</b> adalah Sistem Pakar Diagnosa Kerusakan Pada Handphone berbasis web yang dirancang untuk membantu masyarakat dan teknisi dalam mengidentifikasi berbagai jenis kerusakan pada handphone. Aplikasi ini menggunakan metode <i>Forward Chaining</i> untuk memberikan diagnosa berdasarkan gejala yang dialami pengguna.</p>
 
         <a href="{{ route('guest.diagnosa') }}"
             class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-xl shadow-md hover:bg-gray-900 hover:scale-105 transform transition duration-300 ease-in-out">Mulai Diagnosa
         </a>
+        <div class="mt-4">
+            <span class="text-gray-600 text-sm">Sudah punya akun?</span>
+            <a href="{{ route('login') }}" class="text-gray-800 hover:underline font-semibold text-sm">Login</a>
+        </div>
     </div>
 </body>
 </html>
