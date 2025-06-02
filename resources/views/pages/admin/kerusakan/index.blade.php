@@ -107,11 +107,8 @@
         </div>
     </x-modal>
 
-    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
     <script>
@@ -139,7 +136,6 @@
                 }
             });
 
-            // Ubah placeholder dan sembunyikan label
             $('.dataTables_filter label').contents().filter(function() {
                 return this.nodeType === 3;
             }).remove();
@@ -156,30 +152,29 @@
     </script>
 
     <style>
-        /* Kecilkan info DataTables */
         .dataTables_wrapper .dataTables_info {
             font-size: 0.85rem !important;
             padding-top: 4px !important;
             padding-bottom: 4px !important;
         }
-        /* Kecilkan pagination DataTables */
+
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             font-size: 0.85rem !important;
             padding: 2px 10px !important;
             margin: 0 2px !important;
             border-radius: 4px !important;
-            border: 1px solid #d1d5db !important; /* abu-abu muda */
+            border: 1px solid #d1d5db !important;
             background: #fff !important;
-            color: #374151 !important; /* abu-abu tua */
+            color: #374151 !important;
         }
         .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-            background: #374151 !important; /* abu-abu tua */
+            background: #374151 !important;
             color: #fff !important;
             border: 1px solid #374151 !important;
         }
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            background: #e5e7eb !important; /* abu-abu lebih muda */
-            color: #111827 !important; /* abu-abu sangat tua */
+            background: #e5e7eb !important;
+            color: #111827 !important;
             border: 1px solid #d1d5db !important;
         }
         .dataTables_wrapper .dataTables_filter {
@@ -213,7 +208,7 @@
         }
         .dataTables_wrapper .dataTables_filter .search-icon {
             position: relative;
-            left: -24px;           /* sesuaikan posisi ikon */
+            left: -24px;
             pointer-events: none;
             color: #b0b7c3;
             font-size: 1rem;
