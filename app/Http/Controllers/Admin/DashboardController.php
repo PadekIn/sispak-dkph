@@ -12,6 +12,7 @@ class DashboardController extends Controller
     public function dataKerusakanPerBulan()
     {
         try {
+            $categories = ['LCD', 'Baterai', 'Konektor Charger', 'Kamera', 'Mesin'];
             $histories = \DB::table('histories')->get();
 
             $grouped = [];
@@ -27,36 +28,24 @@ class DashboardController extends Controller
             $bulanTahunList = [];
 
             foreach ($grouped as $bulanTahun => $items) {
-                $allKerusakan = [];
-                foreach ($items as $history) {
-                    $hasil = json_decode($history->hasil_diagnosa, true);
-                    if (is_array($hasil)) {
-                        foreach ($hasil as $item) {
-                            $nama = is_array($item) && isset($item['kerusakan']) ? $item['kerusakan'] : (isset($item['nama']) ? $item['nama'] : $item);
-                            if ($nama && !in_array($nama, $allKerusakan)) {
-                                $allKerusakan[] = $nama;
-                            }
-                        }
-                    }
-                }
+                // Inisialisasi jumlah per kategori
+                $jumlah = array_fill_keys($categories, 0);
 
-                $jumlah = array_fill(0, count($allKerusakan), 0);
                 foreach ($items as $history) {
                     $hasil = json_decode($history->hasil_diagnosa, true);
                     if (is_array($hasil)) {
                         foreach ($hasil as $item) {
-                            $nama = is_array($item) && isset($item['kerusakan']) ? $item['kerusakan'] : (isset($item['nama']) ? $item['nama'] : $item);
-                            $index = array_search($nama, $allKerusakan);
-                            if ($index !== false) {
-                                $jumlah[$index]++;
+                            $kerusakan = is_array($item) && isset($item['kerusakan']) ? $item['kerusakan'] : (isset($item['nama']) ? $item['nama'] : $item);
+                            if ($kerusakan && isset($jumlah[$kerusakan])) {
+                                $jumlah[$kerusakan]++;
                             }
                         }
                     }
                 }
 
                 $result[$bulanTahun] = [
-                    'kerusakan' => $allKerusakan,
-                    'jumlah' => $jumlah
+                    'kerusakan' => $categories,
+                    'jumlah' => array_values($jumlah)
                 ];
                 $bulanTahunList[] = $bulanTahun;
             }
