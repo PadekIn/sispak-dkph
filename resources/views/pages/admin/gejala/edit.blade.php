@@ -46,7 +46,7 @@
                                 Batal
                             </a>
                             <x-primary-button>
-                                {{ __('Update Gejala') }}
+                                {{ __('Perbarui Gejala') }}
                             </x-primary-button>
                         </div>
                     </form>

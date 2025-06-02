@@ -49,7 +49,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $kerusakan->solusi }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex justify gap-3">
-                                                <a href="{{ route('admin.kerusakan.edit', $kerusakan->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                <a href="{{ route('admin.kerusakan.edit', $kerusakan->id) }}" class="text-indigo-600 hover:text-indigo-900">Ubah</a>
                                                 <button type="button"
                                                     class="text-red-600 hover:text-red-900"
                                                     onclick="confirmHapus('{{ route('admin.kerusakan.destroy', $kerusakan->id) }}')">

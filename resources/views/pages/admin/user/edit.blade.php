@@ -42,7 +42,7 @@
 
                         <!-- Password (optional) -->
                         <div class="mt-4">
-                            <x-input-label for="password" :value="__('Password (Kosongkan jika tidak ingin diubah)')" />
+                            <x-input-label for="password" :value="__('Kata Sandi (Kosongkan jika tidak ingin diubah)')" />
 
                             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" autocomplete="new-password" />
 
@@ -51,7 +51,7 @@
 
                          <!-- Confirm Password (optional) -->
                          <div class="mt-4">
-                            <x-input-label for="password_confirmation" :value="__('Konfirmasi Password (Kosongkan jika tidak ingin diubah)')" />
+                            <x-input-label for="password_confirmation" :value="__('Konfirmasi Kata Sandi (Kosongkan jika tidak ingin diubah)')" />
 
                             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" autocomplete="new-password" />
 
@@ -74,7 +74,7 @@
                                 Batal
                             </a>
                             <x-primary-button>
-                                {{ __('Update User') }}
+                                {{ __('Perbarui Pengguna') }}
                             </x-primary-button>
                         </div>
                     </form>

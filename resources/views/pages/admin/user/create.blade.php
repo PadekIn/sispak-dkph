@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tambah User Baru') }}
+            {{ __('Tambah Pengguna Baru') }}
         </h2>
     </x-slot>
 
@@ -41,7 +41,7 @@
 
                         <!-- Password -->
                         <div class="mt-4">
-                            <x-input-label for="password" :value="__('Password')" />
+                            <x-input-label for="password" :value="__('Kata Sandi')" />
 
                             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
 
@@ -50,7 +50,7 @@
 
                         <!-- Confirm Password -->
                         <div class="mt-4">
-                            <x-input-label for="password_confirmation" :value="__('Konfirmasi Password')" />
+                            <x-input-label for="password_confirmation" :value="__('Konfirmasi Kata Sandi')" />
 
                             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
 
@@ -73,7 +73,7 @@
                                 Batal
                             </a>
                             <x-primary-button>
-                                {{ __('Simpan User') }}
+                                {{ __('Simpan Pengguna') }}
                             </x-primary-button>
                         </div>
                     </form>
