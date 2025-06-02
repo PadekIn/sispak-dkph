@@ -131,7 +131,7 @@
                 return this.nodeType === 3;
             }).remove();
             $('.dataTables_filter input')
-                .attr('placeholder', 'Telusuri')
+                .attr('placeholder', 'Cari')
                 .after('<span class="search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path stroke="#b0b7c3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.35-5.15a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></span>')
                 .on('focus', function() {
                     $(this).attr('placeholder', '');
