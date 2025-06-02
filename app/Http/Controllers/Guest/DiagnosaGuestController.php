@@ -52,7 +52,7 @@ class DiagnosaGuestController extends Controller
 
             if ($match > 0) {
                 $hasilDiagnosa[] = [
-                    'kerusakan' => $kerusakan->nama_kerusakan,
+                    'kerusakan' => $kerusakan->jenis_kerusakan,
                     'jenis_kerusakan' => $kerusakan->jenis_kerusakan,
                     'solusi' => $kerusakan->solusi,
                     'match' => $match,
