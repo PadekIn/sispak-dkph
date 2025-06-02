@@ -39,8 +39,12 @@
                             <x-input-error class="mt-2" :messages="$errors->get('nama_gejala')" />
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
+                        <div class="flex items-center justify-end mt-4 gap-2">
+                            <a href="{{ route('admin.gejala.index') }}"
+                               class="inline-flex items-center px-4 py-2 border border-gray-300 bg-white rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                Batal
+                            </a>
+                            <x-primary-button>
                                 {{ __('Simpan Gejala') }}
                             </x-primary-button>
                         </div>
