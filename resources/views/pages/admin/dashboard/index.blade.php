@@ -31,7 +31,7 @@
                     <div class="text-4xl font-extrabold text-gray-900 mb-1">{{ \App\Models\Kerusakan::count() }}</div>
                 </div>
                 <div class="bg-gray-100 border-l-4 border-gray-400 p-4 rounded shadow flex flex-col justify-center">
-                    <div class="text-xs font-medium text-gray-500 tracking-wide uppercase">Jumlah User</div>
+                    <div class="text-xs font-medium text-gray-500 tracking-wide uppercase">Jumlah Pengguna</div>
                     <div class="text-4xl font-extrabold text-gray-900 mb-1">{{ \App\Models\User::count() }}</div>
                 </div>
             </div>
