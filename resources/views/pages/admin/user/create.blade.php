@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tambah User Baru') }}
+            {{ __('Tambah Pengguna Baru') }}
         </h2>
     </x-slot>
 
@@ -73,7 +73,7 @@
                                 Batal
                             </a>
                             <x-primary-button>
-                                {{ __('Simpan User') }}
+                                {{ __('Simpan Pengguna') }}
                             </x-primary-button>
                         </div>
                     </form>

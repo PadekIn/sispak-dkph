@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manajemen User') }}
+            {{ __('Manajemen Pengguna') }}
         </h2>
     </x-slot>
 
@@ -13,7 +13,7 @@
                         <h3 class="text-lg font-medium text-gray-900 mb-2 sm:mb-0">Daftar Pengguna</h3>
                         <div class="flex items-center gap-2 w-full sm:w-auto">
                             <a href="{{ route('admin.user.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                Tambah User
+                                Tambah Pengguna
                             </a>
                             <div class="datatable-search-container w-full sm:w-auto"></div>
                         </div>
@@ -37,7 +37,7 @@
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peran</th>
                                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                                 </tr>
                             </thead>
@@ -49,7 +49,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->role }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex justify gap-3">
-                                                <a href="{{ route('admin.user.edit', $user->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                <a href="{{ route('admin.user.edit', $user->id) }}" class="text-indigo-600 hover:text-indigo-900">Ubah</a>
                                                 <button type="button"
                                                     class="text-red-600 hover:text-red-900"
                                                     onclick="confirmHapusUser('{{ route('admin.user.destroy', $user->id) }}')">

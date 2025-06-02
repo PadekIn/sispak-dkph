@@ -30,7 +30,7 @@
                         <table id="history-table" class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pengguna</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gejala Terpilih</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hasil Diagnosa</th>
@@ -112,17 +112,10 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center py-4">Belum ada riwayat diagnosa.</td>
-                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-
-                    @if ($histories->isEmpty())
-                        <p class="text-gray-600 mt-4">Belum ada riwayat diagnosa.</p>
-                    @endif
                 </div>
             </div>
         </div>
@@ -147,7 +140,7 @@
                         "previous": "&lt;"
                     },
                     "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-                    "emptyTable": "Belum ada riwayat diagnosa.",
+                    "emptyTable": "Belum ada riwayat diagnosa",
                     "zeroRecords": "Data tidak ditemukan"
                 }
             });
@@ -156,7 +149,7 @@
                 return this.nodeType === 3;
             }).remove();
             $('.dataTables_filter input')
-                .attr('placeholder', 'Telusuri')
+                .attr('placeholder', 'Search')
                 .after('<span class="search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path stroke="#b0b7c3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.35-5.15a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></span>')
                 .on('focus', function() {
                     $(this).attr('placeholder', '');

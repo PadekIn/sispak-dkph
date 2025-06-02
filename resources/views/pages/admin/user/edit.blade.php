@@ -74,7 +74,7 @@
                                 Batal
                             </a>
                             <x-primary-button>
-                                {{ __('Update User') }}
+                                {{ __('Perbarui Pengguna') }}
                             </x-primary-button>
                         </div>
                     </form>
