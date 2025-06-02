@@ -14,7 +14,7 @@
                     <form method="POST" action="{{ route('pengguna.diagnosa.submit') }}">
                         @csrf
                         @foreach ($gejalas as $gejala)
-                            <div class="flex items-center mb-2">
+                            <div class="flex items-center mb-2 pb-2">
                                 <input id="gejala-{{ $gejala->id }}" name="gejala[]" type="checkbox" value="{{ $gejala->id }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500">
                                 <label for="gejala-{{ $gejala->id }}" class="ms-2 text-sm font-medium text-gray-900">{{ $gejala->nama_gejala }}</label>
                             </div>
