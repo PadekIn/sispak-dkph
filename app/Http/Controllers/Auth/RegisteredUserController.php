@@ -71,6 +71,6 @@ class RegisteredUserController extends Controller
             }
         }
 
-        return redirect()->route('login');
+        return redirect()->route('pengguna.diagnosa');
     }
 }
