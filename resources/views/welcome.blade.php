@@ -46,7 +46,7 @@
         </a>
         <div class="mt-4">
             <span class="text-gray-600 text-sm">Sudah punya akun?</span>
-            <a href="{{ route('login') }}" class="text-gray-800 hover:underline font-semibold text-sm">Login</a>
+            <a href="{{ route('login') }}" class="text-gray-800 hover:underline font-semibold text-sm">Masuk</a>
         </div>
     </div>
 </body>
