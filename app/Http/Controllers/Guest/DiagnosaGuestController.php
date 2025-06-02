@@ -78,7 +78,7 @@ class DiagnosaGuestController extends Controller
         session(['guest_diagnosa_result' => $result]);
 
         // Redirect ke halaman login dengan pesan
-        return redirect()->route('login')->with('info', 'Silakan login atau register untuk menyimpan hasil diagnosa Anda.');
+        return redirect()->route('login')->with('info', 'Silakan masuk atau daftar untuk menyimpan hasil diagnosa Anda.');
     }
 
     public function hasil()
@@ -98,6 +98,6 @@ class DiagnosaGuestController extends Controller
     public function histori()
     {
         // Redirect ke halaman login dengan pesan
-        return redirect()->route('login')->with('info', 'Silakan login terlebih dahulu untuk melihat histori diagnosa Anda.');
+        return redirect()->route('login')->with('info', 'Silakan masuk terlebih dahulu untuk melihat histori diagnosa Anda.');
     }
 }

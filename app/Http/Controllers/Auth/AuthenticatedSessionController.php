@@ -51,7 +51,7 @@ class AuthenticatedSessionController extends Controller
 
                 // Redirect ke halaman hasil dengan pesan sukses
                 return redirect()->route('pengguna.hasil')->with([
-                    'success' => 'Login berhasil dan hasil diagnosa sebelumnya telah disimpan.',
+                    'success' => 'Berhasil masuk dan hasil diagnosa sebelumnya telah disimpan.',
                     'result' => $guestDiagnosa
                 ]);
             } catch (\Exception $e) {
