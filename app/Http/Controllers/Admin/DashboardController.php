@@ -13,7 +13,7 @@ class DashboardController extends Controller
     {
         try {
             $categories = ['LCD', 'Baterai', 'Konektor Charger', 'Kamera', 'Mesin'];
-            $histories = \DB::table('histories')->get();
+            $histories = DB::table('histories')->get();
 
             $grouped = [];
             foreach ($histories as $history) {
