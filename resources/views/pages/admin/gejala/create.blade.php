@@ -27,7 +27,7 @@
 
                         <!-- Kode Gejala -->
                         <div>
-                            <x-input-label for="kerusakan_id" :value="__('kerusakan_id')" />
+                            <x-input-label for="kerusakan_id" :value="__('Nama Kerusakan')" />
                             <select id="kerusakan_id" name="kerusakan_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
                                 @foreach ($kerusakans as $kerusakan)
                                     <option value="{{ $kerusakan->id}}">{{ $kerusakan->nama_kerusakan }}</option>

@@ -38,10 +38,15 @@
                 <p
                     x-data="{ show: true }"
                     x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Tersimpan') }}</p>
+                    x-transition.opacity.duration.500ms
+                    x-init="setTimeout(() => show = false, 5000)"
+                    class="text-sm text-green-600 bg-green-100 border border-green-300 rounded px-4 py-2 shadow-sm"
+                >
+                    <svg class="inline w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {{ __('Tersimpan') }}
+                </p>
             @endif
         </div>
     </form>

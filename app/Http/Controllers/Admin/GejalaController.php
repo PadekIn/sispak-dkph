@@ -40,10 +40,6 @@ class GejalaController extends Controller
             'kerusakan_id' => 'required|exists:kerusakans,id',
         ]);
 
-        // $requestrule->validate([
-        //     ''
-        // ]);
-
         try {
             Gejala::create($request->all());
             Rule::create([
@@ -59,8 +55,11 @@ class GejalaController extends Controller
     public function edit($id)
     {
         try{
+            $kerusakans = Kerusakan::all();
             $gejala = Gejala::findOrFail($id);
-            return view('pages.admin.gejala.edit', compact('gejala'));
+
+            logger($gejala->kerusakan_id);
+            return view('pages.admin.gejala.edit', compact('gejala', 'kerusakans'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data gejala: ' . $e->getMessage());
         }
@@ -68,19 +67,36 @@ class GejalaController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Validasi input
         $request->validate([
-            'kode_gejala' => 'required|string|max:10|unique:gejalas,kode_gejala,' ,
             'nama_gejala' => 'required|string|max:255',
+            'kerusakan_id' => 'required|exists:kerusakans,id',
         ]);
 
         try {
+            // Ambil data gejala
             $gejala = Gejala::findOrFail($id);
-            $gejala->update($request->all());
+
+            // Update data gejala
+            $gejala->update([
+                'nama_gejala' => $request->nama_gejala,
+                'kerusakan_id' => $request->kerusakan_id,
+            ]);
+
+            // Update relasi di tabel rules jika ada
+            $rule = Rule::where('gejala_id', $gejala->id)->first();
+            if ($rule) {
+                $rule->update([
+                    'kerusakan_id' => $request->kerusakan_id,
+                ]);
+            }
+
             return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memperbarui gejala: ' . $e->getMessage());
         }
     }
+
 
     public function destroy($id)
     {
