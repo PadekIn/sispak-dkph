@@ -63,7 +63,8 @@ class RegisteredUserController extends Controller
                 // Redirect ke halaman hasil dengan pesan sukses
                 return redirect()->route('pengguna.hasil')->with([
                     'success' => 'Berhasil daftar dan hasil diagnosa sebelumnya telah disimpan.',
-                    'result' => $guestDiagnosa
+                    'result' => $guestDiagnosa,
+                    'status' => 'Selamat datang! Akun Anda berhasil dibuat. Silakan lakukan diagnosa untuk mengetahui kerusakan pada handphone Anda.'
                 ]);
             } catch (\Exception $e) {
                 \Illuminate\Support\Facades\Log::error('Error saving guest diagnosa after registration: ' . $e->getMessage());
@@ -71,6 +72,6 @@ class RegisteredUserController extends Controller
             }
         }
 
-        return redirect()->route('pengguna.diagnosa');
+        return redirect()->route('pengguna.diagnosa')->with('status', 'Selamat datang! Akun Anda berhasil dibuat. Silakan lakukan diagnosa untuk mengetahui kerusakan pada handphone Anda.');
     }
 }

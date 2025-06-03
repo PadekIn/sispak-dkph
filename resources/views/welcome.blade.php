@@ -35,7 +35,16 @@
     </style>
 </head>
 <body class="bg-gray-100 to-white min-h-screen flex items-center justify-center px-4">
-     <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-xl w-full text-center fade-in">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-xl w-full text-center fade-in">
+
+        <!-- Notifikasi Sukses -->
+        @if (session('success'))
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 mx-auto max-w-sm rounded text-left" role="alert">
+                <p class="font-bold">Berhasil!</p>
+                <p>{{ session('success') }}</p>
+            </div>
+        @endif
+
         <img src="{{ asset('assets/img/logo-sispak-dkph.png') }}" alt="Logo SISPAK-DKPH" class="mx-auto mb-6 h-24 drop-shadow-md">
 
         <h1 class="text-3xl font-bold text-gray-800 mb-2">Selamat Datang di SISPAK-DKPH!</h1>
