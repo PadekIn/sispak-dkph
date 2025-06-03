@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kerusakans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kerusakan');
-            $table->enum('jenis_kerusakan', ['Baterai', 'LCD', 'Konektor Charger', 'Kamera', 'Mesin']);
+            $table->string('jenis_kerusakan');
             $table->text('solusi')->nullable();
             $table->timestamps();
         });
