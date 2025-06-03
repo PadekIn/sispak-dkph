@@ -15,7 +15,7 @@ class Gejala extends Model
         'nama_gejala',
     ];
 
-    public function pertanyaan() {
-        return $this->hasOne(Pertanyaan::class);
+    public function rules() {
+        return $this->hasMany(Rule::class);
     }
 }
