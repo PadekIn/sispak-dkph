@@ -39,13 +39,13 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @forelse($histories as $history)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 align-top">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 align-top border-b-2 border-gray-200">
                                             {{ $history->user->name ?? 'User ID: '.$history->user_id }}
                                         </td>
-                                        <td class="px-8 py-4 text-sm text-gray-500 align-top" style="width: 150px;">
+                                        <td class="px-8 py-4 text-sm text-gray-500 align-top border-b-2 border-gray-200" style="width: 150px;">
                                             {{ $history->tanggal ? \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y') : $history->created_at->format('d-m-Y') }}
                                         </td>
-                                        <td class="px-8 py-4 text-sm text-gray-700 align-top" style="width: 320px;">
+                                        <td class="px-8 py-4 text-sm text-gray-700 align-top border-b-2 border-gray-200" style="width: 320px;">
                                             @php
                                                 $gejalaNames = json_decode($history->gejala_terpilih, true) ?? [];
                                             @endphp
@@ -57,7 +57,7 @@
                                                 @endforeach
                                             </div>
                                         </td>
-                                        <td class="px-8 py-4 text-sm text-gray-700 w-auto align-top">
+                                        <td class="px-8 py-4 text-sm text-gray-700 w-auto align-top border-b-2 border-gray-200">
                                             @php
                                                 $hasilDiagnosa = json_decode($history->hasil_diagnosa, true);
                                             @endphp
