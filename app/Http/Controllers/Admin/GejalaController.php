@@ -57,6 +57,8 @@ class GejalaController extends Controller
         try{
             $kerusakans = Kerusakan::all();
             $gejala = Gejala::findOrFail($id);
+            // $rule = Rule::where('gejala_id', $gejala->id)->first();
+
             return view('pages.admin.gejala.edit', compact('gejala', 'kerusakans'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data gejala: ' . $e->getMessage());

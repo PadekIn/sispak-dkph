@@ -36,9 +36,9 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hasil Diagnosa</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-400">
+                            <tbody class="bg-white divide-y divide-gray-200">
                                 @forelse($histories as $history)
-                                    <tr class="border-b-2 border-gray-400 last:border-b-0">
+                                    <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 align-top">
                                             {{ $history->user->name ?? 'User ID: '.$history->user_id }}
                                         </td>
@@ -223,5 +223,3 @@
         }
     </style>
 </x-admin-layout>
-
-
