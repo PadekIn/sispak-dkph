@@ -29,10 +29,9 @@
                         <!-- Kode Gejala -->
                         <div>
                             <x-input-label for="kerusakan_id" :value="__('Nama Kerusakan')" />
-                            <select id="kerusakan_id" name="kerusakan_id"  class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
-                                <option selected hidden>Silakan Pilih kategori kerusakan</option>
+                            <select id="kerusakan_id" name="kerusakan_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
                                 @foreach ($kerusakans as $kerusakan)
-                                    <option value="{{ $kerusakan->id }}" >
+                                    <option value="{{ $kerusakan->id }}" {{ old('kerusakan_id', $gejala->kerusakan_id) == $kerusakan->id ? 'selected' : '' }}>
                                         {{ $kerusakan->nama_kerusakan }}
                                     </option>
                                 @endforeach

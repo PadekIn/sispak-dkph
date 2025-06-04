@@ -30,9 +30,23 @@
                     <div class="text-xs font-medium text-gray-500 tracking-wide uppercase">Jumlah Kerusakan</div>
                     <div class="text-4xl font-extrabold text-gray-900 mb-1">{{ \App\Models\Kerusakan::count() }}</div>
                 </div>
-                <div class="bg-gray-100 border-l-4 border-gray-400 p-4 rounded shadow flex flex-col justify-center">
-                    <div class="text-xs font-medium text-gray-500 tracking-wide uppercase">Jumlah Pengguna</div>
-                    <div class="text-4xl font-extrabold text-gray-900 mb-1">{{ \App\Models\User::count() }}</div>
+                <div class="relative group [perspective:1000px]">
+                    <div class="w-full h-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                        <!-- Front Side -->
+                        <div class="bg-gray-100 border-l-4 border-gray-400 p-4 rounded shadow flex flex-col justify-center absolute w-full h-full backface-hidden">
+                            <div class="text-xs font-medium text-gray-500 tracking-wide uppercase">Jumlah Pengguna</div>
+                            <div class="text-4xl font-extrabold text-gray-900 mb-1">
+                                {{ \App\Models\User::where('role', 'pengguna')->count() }}
+                            </div>
+                        </div>
+                        <!-- Back Side -->
+                        <div class="bg-gray-200 border-l-4 border-black p-4 rounded shadow flex flex-col justify-center absolute w-full h-full [transform:rotateY(180deg)] backface-hidden">
+                            <div class="text-xs font-medium text-black tracking-wide uppercase">Jumlah Admin</div>
+                            <div class="text-4xl font-extrabold text-black mb-1">
+                                {{ \App\Models\User::where('role', 'admin')->count() }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -209,3 +223,9 @@
         });
     </script>
 </x-admin-layout>
+
+<style>
+    .backface-hidden {
+        backface-visibility: hidden;
+    }
+</style>
