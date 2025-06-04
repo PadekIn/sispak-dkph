@@ -44,8 +44,16 @@ Sebelum download project pastikan versi php minimal 8.2 atau yang paling terbaru
 
 9.  Terakhir, jalankan perintah berikut untuk menyalakan web server dan vite
 
+    untuk menjalankan di mode development:
+
     ```
     npm run dev
+    ```
+
+    untuk menjalankan di mode biasa/production:
+
+    ```
+    php artisan serve
     ```
 
 10. Setelah perintah di atas dijalankan, web app Anda bisa sudah bisa diakses di:
