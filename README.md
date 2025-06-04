@@ -56,7 +56,7 @@ Sebelum download project pastikan versi php minimal 8.2 atau yang paling terbaru
     php artisan serve
     ```
 
-10. Setelah perintah di atas dijalankan, web app Anda bisa sudah bisa diakses di:
+10. Setelah perintah di atas dijalankan, web app Anda sudah bisa diakses di:
     ```
     http://localhost:8000
     ```
