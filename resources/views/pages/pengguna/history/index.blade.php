@@ -26,22 +26,22 @@
                     @endif
 
                     <div class="overflow-x-auto">
-                        <table class="min-w-full table-auto divide-y divide-gray-200">
+                        <table class="min-w-full table-auto border-collapse">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-auto">Tanggal</th>
-                                    <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-auto">Gejala Terpilih</th>
-                                    <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-auto">Hasil Diagnosa</th>
+                                    <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b-2 border-gray-200">Tanggal</th>
+                                    <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b-2 border-gray-200">Gejala Terpilih</th>
+                                    <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b-2 border-gray-200">Hasil Diagnosa</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
+                            <tbody class="bg-white">
                                 @if($histories->isEmpty())
                                     <tr>
                                         <td colspan="3" class="text-center py-4 text-gray-500">Belum ada riwayat diagnosa.</td>
                                     </tr>
                                 @else
                                     @foreach ($histories as $history)
-                                        <tr>
+                                        <tr class="border-b-2 border-gray-200">
                                             <td class="px-8 py-4 text-sm text-gray-500 align-top" style="width: 150px;">
                                                 {{ $history->tanggal ? \Carbon\Carbon::parse($history->tanggal)->format('d-m-Y') : $history->created_at->format('d-m-Y') }}
                                             </td>
@@ -134,15 +134,12 @@
                                                     {{ $history->hasil_diagnosa }}
                                                 @endif
                                             </td>
-
-
                                         </tr>
                                     @endforeach
                                 @endif
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
