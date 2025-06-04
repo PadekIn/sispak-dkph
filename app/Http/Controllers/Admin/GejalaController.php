@@ -42,10 +42,10 @@ class GejalaController extends Controller
 
         try {
             Gejala::create($request->all());
-            Rule::create([
-                'gejala_id' => Gejala::where('kode_gejala', $nextKodeGejala)->first()->id,
-                'kerusakan_id' => $request->kerusakan_id,
-            ]);
+            // Rule::create([
+            //     'gejala_id' => Gejala::where('kode_gejala', $nextKodeGejala)->first()->id,
+            //     'kerusakan_id' => $request->kerusakan_id,
+            // ]);
             return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menambahkan gejala: ' . $e->getMessage());
@@ -82,12 +82,12 @@ class GejalaController extends Controller
             ]);
 
             // Update relasi di tabel rules jika ada
-            $rule = Rule::where('gejala_id', $gejala->id)->first();
-            if ($rule) {
-                $rule->update([
-                    'kerusakan_id' => $request->kerusakan_id,
-                ]);
-            }
+            // $rule = Rule::where('gejala_id', $gejala->id)->first();
+            // if ($rule) {
+            //     $rule->update([
+            //         'kerusakan_id' => $request->kerusakan_id,
+            //     ]);
+            // }
 
             return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil diperbarui.');
         } catch (\Exception $e) {

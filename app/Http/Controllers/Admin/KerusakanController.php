@@ -22,7 +22,6 @@ class KerusakanController extends Controller
     }
     public function store(Request $request) {
         $request->validate([
-            'nama_kerusakan' => 'required|string|max:255',
             'jenis_kerusakan' => 'required|string|max:255',
             'solusi' => 'required|string|max:1000',
         ]);
@@ -31,7 +30,10 @@ class KerusakanController extends Controller
             Kerusakan::create($request->all());
             return redirect()->route('admin.kerusakan.index')->with('success', 'Kerusakan berhasil ditambahkan.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal menambahkan kerusakan: ' . $e->getMessage());
+            if ($e->getCode() == 23000) { // Kode error untuk duplicate entry
+                return redirect()->back()->withInput()->with('error', 'Data kerusakan sudah ada.');
+            }
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan data.');
         }
     }
     public function edit($id) {
@@ -45,7 +47,6 @@ class KerusakanController extends Controller
     }
     public function update(Request $request, $id) {
         $request->validate([
-            'nama_kerusakan' => 'required|string|max:255',
             'jenis_kerusakan' => 'required|string|max:255',
             'solusi' => 'required|string|max:1000',
         ]);
