@@ -34,7 +34,7 @@
                                     <th class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b-2 border-gray-200">Hasil Diagnosa</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
+                            <tbody class="bg-white divide-y divide-gray-200">
                                 @if($histories->isEmpty())
                                     <tr>
                                         <td colspan="3" class="text-center py-4 text-gray-500">Belum ada riwayat diagnosa.</td>
