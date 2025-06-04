@@ -36,21 +36,22 @@ class DiagnosaGuestController extends Controller
         ]);
 
         $gejalaIds = $request->input('gejala');
+
+        // Ambil semua gejala yang dipilih user, termasuk relasi ke kerusakan
         $gejalas = Gejala::whereIn('id', $gejalaIds)->get();
-        $kerusakans = Kerusakan::with('rules')->get();
+
+        // Kelompokkan gejala yang tersedia berdasarkan kerusakan_id
+        $kelompokGejala = Gejala::all()->groupBy('kerusakan_id');
 
         $hasilDiagnosa = [];
-        foreach ($kerusakans as $kerusakan) {
-            $match = 0;
-            $total = count($kerusakan->rules);
 
-            foreach ($kerusakan->rules as $rule) {
-                if (in_array($rule->gejala_id, $gejalaIds)) {
-                    $match++;
-                }
-            }
+        foreach ($kelompokGejala as $kerusakanId => $gejalaGroup) {
+            $match = $gejalaGroup->whereIn('id', $gejalaIds)->count();
+            $total = $gejalaGroup->count();
 
             if ($match > 0) {
+                $kerusakan = Kerusakan::find($kerusakanId);
+
                 $hasilDiagnosa[] = [
                     'kerusakan' => $kerusakan->jenis_kerusakan,
                     'jenis_kerusakan' => $kerusakan->jenis_kerusakan,
@@ -80,6 +81,7 @@ class DiagnosaGuestController extends Controller
         // Redirect ke halaman login dengan pesan
         return redirect()->route('login')->with('info', 'Silakan masuk atau daftar untuk menyimpan hasil diagnosa Anda.');
     }
+
 
     public function hasil()
     {

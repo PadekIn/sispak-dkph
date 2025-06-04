@@ -25,13 +25,6 @@
                     <form method="POST" action="{{ route('admin.kerusakan.store') }}">
                         @csrf
 
-                        <!-- Nama Kerusakan -->
-                        <div>
-                            <x-input-label for="nama_kerusakan" :value="__('Nama Kerusakan')" />
-                            <x-text-input id="nama_kerusakan" class="block mt-1 w-full" type="text" name="nama_kerusakan" :value="old('nama_kerusakan')" required autofocus autocomplete="off" />
-                            <x-input-error class="mt-2" :messages="$errors->get('nama_kerusakan')" />
-                        </div>
-
                         <!-- Jenis Kerusakan -->
                         <div class="mt-4">
                             <x-input-label for="jenis_kerusakan" :value="__('Jenis Kerusakan')" />

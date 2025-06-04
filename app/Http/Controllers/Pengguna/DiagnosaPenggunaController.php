@@ -27,33 +27,29 @@ class DiagnosaPenggunaController extends Controller
     public function submit(Request $request)
     {
         try {
-            // Logika submit diagnosa untuk pengguna
-            // Ini akan mencakup validasi, pencarian kerusakan berdasarkan gejala,
-            // dan menyimpan hasil ke tabel histories yang terkait dengan user ID.
-
-            // Placeholder untuk saat ini:
+            // Validasi input: gejala harus array dan tiap item harus ada di tabel gejalas
             $request->validate([
                 'gejala' => 'required|array',
                 'gejala.*' => 'exists:gejalas,id'
             ]);
+
             $gejalaIds = $request->gejala;
-            // Ambil objek Gejala berdasarkan ID yang dipilih
+
+            // Ambil data gejala berdasarkan ID yang dipilih user
             $gejalas = Gejala::whereIn('id', $gejalaIds)->get();
 
-            $kerusakans = Kerusakan::with('rules')->get();
+            // Kelompokkan gejala berdasarkan kerusakan_id
+            $kelompokGejala = Gejala::all()->groupBy('kerusakan_id');
 
             $hasilDiagnosa = [];
-            foreach ($kerusakans as $kerusakan) {
-                $match = 0;
-                $total = count($kerusakan->rules);
 
-                foreach ($kerusakan->rules as $rule) {
-                    if (in_array($rule->gejala_id, $gejalaIds)) {
-                        $match++;
-                    }
-                }
+            foreach ($kelompokGejala as $kerusakanId => $gejalaGroup) {
+                $match = $gejalaGroup->whereIn('id', $gejalaIds)->count();
+                $total = $gejalaGroup->count();
 
                 if ($match > 0) {
+                    $kerusakan = Kerusakan::find($kerusakanId);
+
                     $hasilDiagnosa[] = [
                         'kerusakan' => $kerusakan->jenis_kerusakan,
                         'jenis_kerusakan' => $kerusakan->jenis_kerusakan,
@@ -81,7 +77,7 @@ class DiagnosaPenggunaController extends Controller
             History::create([
                 'user_id' => Auth::id(),
                 'tanggal' => now(),
-                'gejala_terpilih' => json_encode($gejalas->pluck('nama_gejala')->toArray()), // Simpan nama gejala dalam format JSON
+                'gejala_terpilih' => json_encode($result['gejala']),
                 'hasil_diagnosa' => json_encode($hasilDiagnosa),
             ]);
 
@@ -91,6 +87,7 @@ class DiagnosaPenggunaController extends Controller
             return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat memproses diagnosa pengguna.');
         }
     }
+
 
     public function hasil()
     {

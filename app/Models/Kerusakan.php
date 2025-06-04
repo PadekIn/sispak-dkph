@@ -11,12 +11,11 @@ class Kerusakan extends Model
     use HasFactory;
 
         protected $fillable = [
-            'nama_kerusakan',
             'jenis_kerusakan',
             'solusi'
         ];
 
     public function rules() {
-        return $this->hasMany(Rule::class);
+        return $this->hasMany(Gejala::class);
     }
 }

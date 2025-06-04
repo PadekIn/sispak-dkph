@@ -11,11 +11,12 @@ class Gejala extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kerusakan_id',
         'kode_gejala',
         'nama_gejala',
     ];
 
     public function rules() {
-        return $this->hasMany(Rule::class);
+        return $this->belongsTo(Kerusakan::class);
     }
 }

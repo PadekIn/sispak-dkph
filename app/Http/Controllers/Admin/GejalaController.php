@@ -42,10 +42,10 @@ class GejalaController extends Controller
 
         try {
             Gejala::create($request->all());
-            Rule::create([
-                'gejala_id' => Gejala::where('kode_gejala', $nextKodeGejala)->first()->id,
-                'kerusakan_id' => $request->kerusakan_id,
-            ]);
+            // Rule::create([
+            //     'gejala_id' => Gejala::where('kode_gejala', $nextKodeGejala)->first()->id,
+            //     'kerusakan_id' => $request->kerusakan_id,
+            // ]);
             return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menambahkan gejala: ' . $e->getMessage());
@@ -57,9 +57,9 @@ class GejalaController extends Controller
         try{
             $kerusakans = Kerusakan::all();
             $gejala = Gejala::findOrFail($id);
-            $rule = Rule::where('gejala_id', $gejala->id)->first();
+            // $rule = Rule::where('gejala_id', $gejala->id)->first();
 
-            return view('pages.admin.gejala.edit', compact('gejala', 'kerusakans', 'rule'));
+            return view('pages.admin.gejala.edit', compact('gejala', 'kerusakans'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengambil data gejala: ' . $e->getMessage());
         }
@@ -84,12 +84,12 @@ class GejalaController extends Controller
             ]);
 
             // Update relasi di tabel rules jika ada
-            $rule = Rule::where('gejala_id', $gejala->id)->first();
-            if ($rule) {
-                $rule->update([
-                    'kerusakan_id' => $request->kerusakan_id,
-                ]);
-            }
+            // $rule = Rule::where('gejala_id', $gejala->id)->first();
+            // if ($rule) {
+            //     $rule->update([
+            //         'kerusakan_id' => $request->kerusakan_id,
+            //     ]);
+            // }
 
             return redirect()->route('admin.gejala.index')->with('success', 'Gejala berhasil diperbarui.');
         } catch (\Exception $e) {
