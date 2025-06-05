@@ -32,7 +32,6 @@ RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache \
     && chown -R www-data:www-data /var/www/database \
     && chmod -R 777 /var/www/database \
-    && chmod -R 777 /var/www/database/database.sqlite
 
 # Jalankan migration saat build (karena pakai SQLite)
 RUN php artisan migrate --force || true
