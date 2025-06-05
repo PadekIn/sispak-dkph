@@ -21,11 +21,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock package.json ./
 
 # Install dependencies with Composer
-RUN composer install --no-dev --optimize-autoloader \
-    && php artisan cache:clear \
-    && php artisan config:clear \
-    && php artisan view:clear \
-    && php artisan route:clear
+RUN composer install --no-dev --optimize-autoloader
+    # && php artisan cache:clear \
+    # && php artisan config:clear \
+    # && php artisan view:clear \
+    # && php artisan route:clear
 
 # Copy project files (kecuali yang ada di .dockerignore)
 COPY . .
