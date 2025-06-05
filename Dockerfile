@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Copy project files (kecuali yang ada di .dockerignore)
+COPY . .
+
 # Install dependencies with Composer
 RUN composer install --no-dev --optimize-autoloader \
     && php artisan cache:clear \
@@ -33,8 +36,8 @@ RUN chown -R www-data:www-data /var/www \
     && chown -R www-data:www-data /var/www/database \
     && chmod -R 777 /var/www/database \
 
-# Jalankan migration saat build (karena pakai SQLite)
-RUN php artisan migrate --force || true
+    # Jalankan migration saat build (karena pakai SQLite)
+    RUN php artisan migrate --force || true
 
 # Expose PHP-FPM port
 EXPOSE 9000
