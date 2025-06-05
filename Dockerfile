@@ -37,7 +37,7 @@ RUN chown -R www-data:www-data /var/www \
 RUN php artisan migrate --force || true
 
 # Expose PHP-FPM port
-EXPOSE 8082
+EXPOSE 9000
 
 # Start PHP-FPM
 CMD ["php-fpm"]
