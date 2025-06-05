@@ -21,11 +21,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . .
 
 # Install dependencies with Composer
-RUN composer install --no-dev --optimize-autoloader
-    # && php artisan cache:clear \
-    # && php artisan config:clear \
-    # && php artisan view:clear \
-    # && php artisan route:clear
+RUN composer install --no-dev --optimize-autoloader \
+    && php artisan cache:clear \
+    && php artisan config:clear \
+    && php artisan view:clear \
+    && php artisan route:clear
 
 # Copy project files (kecuali yang ada di .dockerignore)
 COPY . .
@@ -34,7 +34,8 @@ COPY . .
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache \
     && chown -R www-data:www-data /var/www/database \
-    && chmod -R 777 /var/www/database
+    && chmod -R 777 /var/www/database \
+    && chamod -R 775 /var/www/public
 
 # Jalankan migration saat build (karena pakai SQLite)
 RUN php artisan migrate --force || true
